@@ -27,6 +27,6 @@ body {
   }
 
   nav {
-    @apply flex px-4 py-2 items-center justify-between;
+    @apply flex mr-3 ml-1 my-2 items-center justify-between;
   }
 }
