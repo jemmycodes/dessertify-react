@@ -1,3 +1,4 @@
+import Hero from "@/components/Hero/Hero";
 import Head from "next/head";
 
 function HomePage() {
@@ -12,7 +13,7 @@ function HomePage() {
           rel="stylesheet"
         />
       </Head>
-      <div>This is the Home Page</div>;
+      <Hero />
     </>
   );
 }

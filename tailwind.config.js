@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./pages/**/*.{js,jsx}", "./components/**/*.{js,jsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        orange: "#ea580c",
+      },
+    },
   },
   plugins: [],
 };
