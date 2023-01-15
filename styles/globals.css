@@ -23,10 +23,10 @@ body {
   }
 
   .nav-close {
-    @apply hidden md:flex md:flex-row gap-8 w-1/2 justify-between mr-5;
+    @apply hidden md:flex md:justify-self-end md:flex-row md:gap-2 w-1/2 justify-between;
   }
 
   nav {
-    @apply flex mr-3 ml-1 my-2 items-center justify-between;
+    @apply flex  my-2 items-center justify-between;
   }
 }
