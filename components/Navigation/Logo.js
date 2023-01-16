@@ -6,7 +6,7 @@ function Logo() {
     <div className="flex items-center">
       <Image
         src={logo}
-        alt="App Logo"
+        alt="Logo"
         className="max-w-[3rem] object-cover"
         placeholder="blur"
       />

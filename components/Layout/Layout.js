@@ -3,8 +3,8 @@ import Navigation from "../Navigation/Navigation";
 function Layout(props) {
   return (
     <>
-      <main className="w-full mx-auto pr-6 pl-4 max-w-3 max-w-[1920px]">
-        <Navigation />
+      <Navigation />
+      <main className="w-full mx-auto bg-pageMainColor pr-6 pl-4 max-w-3 max-w-[1920px]">
         {props.children}
       </main>
     </>

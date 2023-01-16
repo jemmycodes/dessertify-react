@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Hero from "@/components/Hero/Hero";
 import Head from "next/head";
 

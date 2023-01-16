@@ -7,11 +7,17 @@ body {
 }
 
 .glass-effect {
-  /* From https://css.glass */
   background: rgba(255, 255, 255, 0.62);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(7.6px);
   -webkit-backdrop-filter: blur(7.6px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.hero-section-glass-effect {
+  background: rgba(255, 255, 255, 0.52);
+  backdrop-filter: blur(6.9px);
+  -webkit-backdrop-filter: blur(6.9px);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
@@ -28,35 +34,35 @@ body {
     @apply hidden md:flex md:justify-self-end md:flex-row md:gap-2 w-1/2 justify-between;
   }
 
-  .hero-img-bg {
-    @apply w-full mt-6 md:mt-0 max-h-96 md:max-h-[40rem] object-cover md:rounded-none rounded-3xl;
-  }
-
   .hero-section {
-    @apply my-12 flex flex-col w-full md:justify-between  justify-center items-center md:flex-row md:gap-16;
-  }
-
-  .hero-section button {
-    @apply w-full md:w-fit text-white font-bold bg-orange py-3 px-7  rounded-lg;
+    @apply py-12 flex flex-col w-full md:justify-between  justify-center items-center md:flex-row;
   }
 
   .hero-section div div {
     @apply flex w-full mt-5;
   }
 
-  .hero-section div:first-of-type {
-    @apply md:max-w-md  md:w-1/2 lg:max-w-xl;
+  .hero-section button {
+    @apply w-full md:w-fit text-white font-bold bg-orange py-3 px-7  rounded-lg;
   }
 
-  .hero-section div:first-of-type p:first-of-type {
+  .hero-section .hero-text-section {
+    @apply md:max-w-md  lg:max-w-xl;
+  }
+
+  .hero-section .hero-text-section p:first-of-type {
     @apply text-4xl lg:text-6xl  mb-4 md:text-left font-black text-center;
   }
 
-  .hero-section div:first-of-type p:last-of-type {
+  .hero-section .hero-text-section p:last-of-type {
     @apply text-center md:text-left;
   }
 
-  .hero-section div:last-of-type {
-    @apply w-full md:w-fit;
+  .hero-card-section {
+    @apply flex md:justify-end md:max-w-xl w-full;
+  }
+
+  .hero-img-bg {
+    @apply mt-6 md:mt-0 max-h-[28rem] md:max-h-[36rem] w-full md:w-3/5 object-cover md:rounded-none rounded-3xl;
   }
 }
