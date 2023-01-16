@@ -1,24 +1,34 @@
+import Image from "next/image";
+import heroBg from "../../public/hero-bg.png";
+
 function Hero() {
   return (
-    <section className="my-7 md:flex md:gap-10">
-      <div className="md:w-3/5">
-        <p className="text-4xl md:text-6xl mb-4 md:text-left font-black text-center">
-          The Safest Online Food Ordering in
+    <section className="hero-section">
+      <div>
+        <p>
+          The Safest Online Food Ordering Service in
           <span className="text-orange"> Nigeria</span>
         </p>
-        <p className="text-center md:text-left">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus nam
-          delectus sed, vel quaerat, libero nesciunt debitis, architecto
-          repudiandae accusamus aut exercitationem nisi non doloribus!
-          Temporibus officia architecto reiciendis blanditiis.
+        <p>
+          The leading online Food Service enterprise that ensures you get your
+          desired food/snacks to satisfy your taste buds! No matter where you
+          may be in Africa, from the East of Africa, Kenya, to the West,
+          Nigeria, Ghana to the South African part and also to the Farther North
+          of Africa, we've got you covered!
         </p>
-        <div className="flex w-full mt-5">
-          <button className="w-full md:w-fit text-white font-bold bg-orange py-3 px-7  rounded-lg">
-            Order now
-          </button>
+        <div>
+          <button>Order now</button>
         </div>
       </div>
-      <div></div>
+      <div>
+        <Image
+          src={heroBg}
+          placeholder="blur"
+          className="hero-img-bg"
+          width="350"
+          height="200"
+        />
+      </div>
     </section>
   );
 }
