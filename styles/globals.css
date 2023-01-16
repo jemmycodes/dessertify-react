@@ -35,7 +35,7 @@ body {
   }
 
   .hero-section {
-    @apply py-12 flex flex-col w-full md:justify-between  justify-center items-center md:flex-row;
+    @apply py-12 flex flex-col w-full md:justify-between justify-center items-center md:flex-row lg:gap-0 gap-16;
   }
 
   .hero-section div div {
@@ -47,7 +47,7 @@ body {
   }
 
   .hero-section .hero-text-section {
-    @apply md:max-w-md  lg:max-w-xl;
+    @apply md:w-3/4 lg:w-1/2;
   }
 
   .hero-section .hero-text-section p:first-of-type {
@@ -59,10 +59,18 @@ body {
   }
 
   .hero-card-section {
-    @apply flex md:justify-end md:max-w-xl w-full;
+    @apply flex md:justify-end w-full md:mt-10 lg:w-1/2;
   }
 
   .hero-img-bg {
-    @apply mt-6 md:mt-0 max-h-[28rem] md:max-h-[36rem] w-full md:w-3/5 object-cover md:rounded-none rounded-3xl;
+    @apply ml-auto lg:h-[550px] h-[420px] w-full lg:w-auto;
+  }
+
+  .hero-section__glass-card {
+    @apply max-w-[10rem] max-h-fit flex flex-col px-5 py-5 text-center rounded-2xl hero-section-glass-effect;
+  }
+
+  .hero-glass-effect__img {
+    @apply absolute -top-1/2 rounded-full max-w-[7rem];
   }
 }

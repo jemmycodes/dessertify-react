@@ -22,7 +22,7 @@ function Hero() {
         </div>
       </div>
       {/* white-striped layout with orange background */}
-      <div className="hero-card-section">
+      <div className="hero-card-section relative">
         <HeroCard />
         <Image
           src={heroBg}
