@@ -1,6 +1,6 @@
-import Image from "next/image";
-import heroBg from "../../public/hero-bg.png";
-import HeroCard from "../UI/HeroCard";
+import heroBg from "../../assets/hero-bg.png";
+import Image from "../Ui/Image";
+import HeroCard from "../Ui/HeroCard";
 
 function Hero() {
   return (
@@ -22,15 +22,12 @@ function Hero() {
         </div>
       </div>
       {/* white-striped layout with orange background */}
-      <div className="hero-card-section relative">
+      <div className="hero-card-section  relative">
         <HeroCard />
         <Image
           src={heroBg}
-          alt="Orange card background wiht with stripes"
-          placeholder="blur"
+          alt="Orange card background with white stripes"
           className="hero-img-bg"
-          width={100}
-          height={100}
         />
       </div>
     </section>

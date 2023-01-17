@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { BiMenuAltRight } from "react-icons/bi";
 import { GiKnifeFork } from "react-icons/gi";
 import { useState } from "react";
 import Logo from "./Logo";
+// import { Link } from "react-router-dom";
 
 function Navigation() {
   const [navigation, setNavigation] = useState(false);
@@ -28,33 +28,17 @@ function Navigation() {
         />
       )}
       <ul className={navigation ? "nav-open" : "nav-close"}>
-        <li>
-          <Link href="/" onClick={() => setNavigation(false)}>
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link href="/menu" onClick={() => setNavigation(false)}>
-            Menu
-          </Link>
-        </li>
+        <li>Home</li>
+        <li>Menu</li>
 
-        <li>
-          <Link href="/about" onClick={() => setNavigation(false)}>
-            About
-          </Link>
-        </li>
-        <li>
-          <Link href="/services" onClick={() => setNavigation(false)}>
-            Services
-          </Link>
-        </li>
-        <li>
-          <Link href="/contact-us" onClick={() => setNavigation(false)}>
-            Contact Us
-          </Link>
-        </li>
-        {navigation && <Logo />}
+        <li>About</li>
+        <li>Services</li>
+        <li>Contact Us</li>
+        {navigation && (
+          <li>
+            <Logo />
+          </li>
+        )}
       </ul>
     </nav>
   );

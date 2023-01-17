@@ -1,17 +1,18 @@
-import logo from "../../public/logo.png";
-import Image from "next/image";
+import logo from "../../assets/logo.png";
+import Image from "../Ui/Image";
 
 function Logo() {
   return (
-    <div className="flex items-center">
+    <li className="flex items-center hover-scale-effect">
       <Image
         src={logo}
         alt="Logo"
         className="max-w-[3rem] object-cover"
-        placeholder="blur"
+        width="100"
+        height="100"
       />
       <p className="font-bold text-xl">JemmyFoods</p>
-    </div>
+    </li>
   );
 }
 

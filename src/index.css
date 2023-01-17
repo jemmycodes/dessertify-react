@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* vanilla css styles */
 body {
   font-family: "Poppins", sans-serif;
 }
@@ -21,19 +22,43 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+/* vanilla css media queries  */
+@media screen and (max-width: 350px) {
+  .hero-section__glass-card {
+    max-width: 7rem;
+  }
+
+  .hero-section__glass-card h3:first-of-type {
+    font-size: 0.7rem;
+  }
+}
+
+/* Tailwind custom classes */
 @layer base {
+  /* general page layout */
+  main {
+    @apply max-w-[1920px] bg-ashBgColor pr-8 pl-6;
+  }
+
+  /* navbar styles */
   nav {
-    @apply flex  my-2 items-center justify-between;
+    @apply flex  my-2 items-center justify-between pr-8 pl-5;
+  }
+
+  nav ul li,
+  .hover-scale-effect {
+    @apply hover:scale-110 duration-300 transition-all cursor-pointer;
   }
 
   .nav-open {
-    @apply fixed w-full top-0 glass-effect right-0 min-h-screen flex justify-center items-center text-center uppercase gap-7 flex-col md:flex;
+    @apply overflow-y-hidden fixed w-full top-0 glass-effect right-0 min-h-screen flex justify-center items-center text-center uppercase gap-7 flex-col md:flex z-40;
   }
 
   .nav-close {
     @apply hidden md:flex md:justify-self-end md:flex-row md:gap-2 w-1/2 justify-between;
   }
 
+  /* hero section styles */
   .hero-section {
     @apply py-12 flex flex-col w-full md:justify-between justify-center items-center md:flex-row lg:gap-0 gap-16;
   }
@@ -63,14 +88,26 @@ body {
   }
 
   .hero-img-bg {
-    @apply ml-auto lg:h-[550px] h-[420px] w-full lg:w-auto;
+    @apply w-screen object-cover rounded-xl ml-auto lg:h-[500px] h-[440px] lg:w-auto;
   }
 
   .hero-section__glass-card {
-    @apply max-w-[10rem] max-h-fit flex flex-col px-5 py-5 text-center rounded-2xl hero-section-glass-effect;
+    @apply max-w-[8rem] max-h-fit flex flex-col px-5 py-5 text-center rounded-2xl hero-section-glass-effect;
+  }
+
+  .hero-card-overlay-section {
+    @apply flex flex-wrap absolute gap-x-5 md:gap-y-16 mt-12 md:mt-7  md:max-w-[32rem] lg:max-w-sm lg:left-44 justify-center items-center z-20 gap-y-8;
   }
 
   .hero-glass-effect__img {
-    @apply absolute -top-1/2 rounded-full max-w-[7rem];
+    @apply -mt-16 rounded-full w-20 object-cover;
+  }
+
+  .hero-card-overlay-section .hero-section__glass-card h3:first-of-type {
+    @apply pt-2 font-bold pb-3;
+  }
+
+  .hero-card-overlay-section .hero-section__glass-card h3:last-of-type span {
+    @apply text-red-600 font-bold;
   }
 }
