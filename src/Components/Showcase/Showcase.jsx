@@ -45,7 +45,7 @@ function Showcase() {
   ));
 
   return (
-    <section className="my-3">
+    <section className="py-3">
       <div className="flex justify-between items-center mb-3">
         <p className="text-3xl">Our Best Foods</p>
         <div className="flex gap-4">
@@ -57,7 +57,7 @@ function Showcase() {
           </span>
         </div>
       </div>
-      <div className="bg-babyPinkBg flex justify-center p-2 rounded-md bt-2 gap-5 overflow-x-scroll">
+      <div className="our-best-foods-section">
         {error && <ErrorImage />}
         {isLoading && (
           <p className="font-bold text-center text-orange">

@@ -9,7 +9,9 @@ function ErrorImage() {
         alt="Item not found"
         className="w-96 object-cover"
       />
-      <p className="text-center font-bold text-orange">Item not found</p>
+      <p className="text-center font-bold text-orange">
+        No food item(s) available
+      </p>
     </div>
   );
 }

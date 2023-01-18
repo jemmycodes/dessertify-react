@@ -10,6 +10,7 @@ module.exports = {
         babyPinkBg: "#f5eee9",
         ashText: "#9b9fa7",
         pepperRed: "#e80013",
+        blackText: "#515151",
       },
     },
   },

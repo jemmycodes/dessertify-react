@@ -3,14 +3,14 @@ import { TbShoppingCartPlus } from "react-icons/tb";
 
 function MenuCards(props) {
   return (
-    <div className="min-w-[300px] p-2 space-y-2 menu-card-glass-effect">
-      <div className="flex justify-between items-center">
+    <div className="menu--card">
+      <div className="menu--card__image">
         <Image
           src={props.src}
           alt={props.title}
           className="max-w-[7rem] rounded-full"
         />
-        <span className="bg-pepperRed cursor-pointer text-white rounded-full p-2 text-2xl">
+        <span className="cart--icon">
           <TbShoppingCartPlus />
         </span>
       </div>

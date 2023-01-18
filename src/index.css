@@ -119,4 +119,40 @@ body {
   .hero-card-overlay-section .hero-section__glass-card h3:last-of-type span {
     @apply text-red-600 font-bold;
   }
+
+  /* showcase styles */
+  .our-best-foods-section {
+    @apply bg-babyPinkBg flex justify-center p-2 rounded-md mt-2 gap-5 overflow-x-scroll;
+  }
+
+  /* Menu card styles */
+
+  div.menu--card {
+    @apply min-w-[300px] p-2 space-y-2 menu-card-glass-effect;
+  }
+
+  .menu--card__image {
+    @apply flex justify-between items-center;
+  }
+
+  .cart--icon {
+    @apply bg-pepperRed cursor-pointer text-white rounded-full p-2 text-2xl;
+  }
+
+  /* Footer styles */
+  footer {
+    @apply py-5 flex flex-col;
+  }
+
+  .footer .footer__logo {
+    @apply flex  pb-6 w-full justify-center items-center mx-auto border-x-transparent md:justify-start  border-b-black border-2 border-t-transparent;
+  }
+
+  .footer .logo-text {
+    @apply text-xl text-blackText md:text-3xl font-bold;
+  }
+
+  .footer div span {
+    @apply text-2xl text-blackText flex justify-center items-center gap-10;
+  }
 }
