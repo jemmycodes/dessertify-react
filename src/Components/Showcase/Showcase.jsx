@@ -1,37 +1,17 @@
 import { useEffect, useState } from "react";
+import useHttp from "../hooks/use-http";
 import { MdOutlineNavigateNext } from "react-icons/md";
 import { MdOutlineNavigateBefore } from "react-icons/md";
 import ErrorImage from "../Ui/ErrorImage";
 import MenuCards from "../Ui/MenuCards";
 
 function Showcase() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [menu, setMenu] = useState([]);
-
-  const fetchBestFoods = async () => {
-    const response = await fetch(
-      "https://free-food-menus-api-production.up.railway.app/burgers"
-    );
-    if (!response.ok) {
-      setIsLoading(false);
-      setError(true);
-      return;
-    }
-
-    const data = await response.json();
-    console.log(data);
-    setMenu(data);
-  };
+  const [isLoading, error, menu, fetchBestFoods] = useHttp(
+    "https://free-food-menus-api-production.up.railway.app/burgers"
+  );
 
   useEffect(() => {
-    try {
-      fetchBestFoods();
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
+    fetchBestFoods();
   }, []);
 
   const menuCard = menu.map((menu) => (
