@@ -15,7 +15,6 @@ const useHttp = (url) => {
       }
 
       const data = await response.json();
-      console.log(data);
       setMenu(data);
     } catch (error) {
       console.log(error);
