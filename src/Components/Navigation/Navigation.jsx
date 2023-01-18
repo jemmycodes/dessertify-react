@@ -2,7 +2,7 @@ import { BiMenuAltRight } from "react-icons/bi";
 import { GiKnifeFork } from "react-icons/gi";
 import { useState } from "react";
 import Logo from "./Logo";
-// import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Navigation() {
   const [navigation, setNavigation] = useState(false);
@@ -28,17 +28,39 @@ function Navigation() {
         />
       )}
       <ul className={navigation ? "nav-open" : "nav-close"}>
-        <li>Home</li>
-        <li>Menu</li>
-
-        <li>About</li>
-        <li>Services</li>
-        <li>Contact Us</li>
+        <li>
+          <NavLink to="/" onClick={() => setNavigation(false)}>
+            Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/menu" onClick={() => setNavigation(false)}>
+            Menu
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/about" onClick={() => setNavigation(false)}>
+            About
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/services" onClick={() => setNavigation(false)}>
+            Services
+          </NavLink>
+        </li>
+        <li>Contact us</li>
         {navigation && (
           <li>
-            <Logo />
+            <NavLink to="/" onClick={() => setNavigation(false)}>
+              <Logo />
+            </NavLink>
           </li>
         )}
+        <li>
+          <NavLink to="/login" onClick={() => setNavigation(false)}>
+            Login
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );

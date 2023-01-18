@@ -8,6 +8,8 @@ module.exports = {
         pageMainColor: "#f5f3f3",
         ashBgColor: "#f5f3f3",
         babyPinkBg: "#f5eee9",
+        ashText: "#9b9fa7",
+        pepperRed: "#e80013",
       },
     },
   },

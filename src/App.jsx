@@ -1,14 +1,22 @@
-import Hero from "./Components/Hero/Hero";
-import Layout from "./Components/Layout/Layout";
 import Navigation from "./Components/Navigation/Navigation";
+import { Routes, Route } from "react-router-dom";
+import Home from "./Pages/Home";
+import Menu from "./Pages/Menu";
+import Services from "./Pages/Services";
+import Login from "./Pages/Login";
+import About from "./Pages/About";
 
 function App() {
   return (
     <>
       <Navigation />
-      <Layout>
-        <Hero />;
-      </Layout>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </>
   );
 }

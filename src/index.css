@@ -7,6 +7,7 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+/* Glassmorphism effect with css */
 .glass-effect {
   background: rgba(255, 255, 255, 0.62);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -19,6 +20,14 @@ body {
   background: rgba(255, 255, 255, 0.52);
   backdrop-filter: blur(6.9px);
   -webkit-backdrop-filter: blur(6.9px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.menu-card-glass-effect {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
@@ -37,12 +46,12 @@ body {
 @layer base {
   /* general page layout */
   main {
-    @apply max-w-[1920px] bg-ashBgColor pr-8 pl-6;
+    @apply max-w-[1920px] bg-ashBgColor px-6 mx-auto;
   }
 
   /* navbar styles */
   nav {
-    @apply flex  my-2 items-center justify-between pr-8 pl-5;
+    @apply flex  my-2 items-center justify-between pr-8 pl-5 max-w-[1920px] mx-auto;
   }
 
   nav ul li,
