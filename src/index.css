@@ -97,7 +97,7 @@ body {
   }
 
   .hero-img-bg {
-    @apply w-screen object-cover rounded-xl ml-auto lg:h-[500px] h-[440px] lg:w-auto;
+    @apply w-screen object-cover rounded-xl ml-auto md:w-auto lg:h-[500px] h-[440px] lg:w-auto;
   }
 
   .hero-section__glass-card {

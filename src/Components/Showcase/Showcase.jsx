@@ -1,16 +1,24 @@
 import { useEffect, useState } from "react";
 import { MdOutlineNavigateNext } from "react-icons/md";
 import { MdOutlineNavigateBefore } from "react-icons/md";
+import ErrorImage from "../Ui/ErrorImage";
 import MenuCards from "../Ui/MenuCards";
 
 function Showcase() {
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [menu, setMenu] = useState([]);
 
   const fetchBestFoods = async () => {
     const response = await fetch(
       "https://free-food-menus-api-production.up.railway.app/burgers"
     );
+    if (!response.ok) {
+      setIsLoading(false);
+      setError(true);
+      return;
+    }
+
     const data = await response.json();
     console.log(data);
     setMenu(data);
@@ -21,8 +29,9 @@ function Showcase() {
       fetchBestFoods();
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   }, []);
 
   const menuCard = menu.map((menu) => (
@@ -49,11 +58,13 @@ function Showcase() {
         </div>
       </div>
       <div className="bg-babyPinkBg flex justify-center p-2 rounded-md bt-2 gap-5 overflow-x-scroll">
-        {isLoading ? (
-          <p className="text-orange font-bold text-center">Getting Menus..</p>
-        ) : (
-          <>{menuCard}</>
+        {error && <ErrorImage />}
+        {isLoading && (
+          <p className="font-bold text-center text-orange">
+            Fetching best Foods...
+          </p>
         )}
+        {!isLoading && <>{menuCard}</>}
       </div>
     </section>
   );
