@@ -4,7 +4,6 @@ import ErrorImage from "../Ui/ErrorImage";
 import MenuCards from "../Ui/MenuCards";
 
 function Showcase({ data }) {
-  console.log(data);
   const menuCard = data.map((menu, index) => (
     <MenuCards
       key={menu._id}

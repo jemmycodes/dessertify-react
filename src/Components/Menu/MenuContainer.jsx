@@ -8,7 +8,6 @@ function MenuContainer() {
   const loadCurrentPageData = data.filter(
     (eachData) => eachData.category === params.menutype
   );
-  console.log(loadCurrentPageData);
   const menuCard = loadCurrentPageData.map((menu, index) => (
     <MenuCards
       key={menu._id}

@@ -1,5 +1,6 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import lowLogo from "../../assets/logo.avif";
 
 function Image(props) {
   return (
@@ -8,6 +9,7 @@ function Image(props) {
       alt={props.alt}
       className={props.className}
       effect="blur"
+      placeholderSrc={lowLogo}
     />
   );
 }
