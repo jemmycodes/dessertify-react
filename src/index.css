@@ -31,6 +31,13 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera  */
+div ul::-webkit-scrollbar,
+.dishes-row::-webkit-scrollbar,
+.our-best-foods-section::-webkit-scrollbar {
+  display: none;
+}
+
 /* vanilla css media queries  */
 @media screen and (max-width: 350px) {
   .hero-section__glass-card {
@@ -45,13 +52,14 @@ body {
 /* Tailwind custom classes */
 @layer base {
   /* general page layout */
-  main {
+  main,
+  .footer {
     @apply max-w-[1920px] bg-ashBgColor px-6 mx-auto;
   }
 
   /* navbar styles */
   nav {
-    @apply flex  my-2 items-center justify-between pr-8 pl-5 max-w-[1920px] mx-auto;
+    @apply flex  my-2 items-center justify-between pr-8 pl-5 max-w-[1920px] mx-auto text-blackText;
   }
 
   nav ul li,
@@ -59,12 +67,20 @@ body {
     @apply hover:scale-110 duration-300 transition-all cursor-pointer;
   }
 
+  .active-link-class {
+    @apply border-b-2  border-orange transition-all duration-200;
+  }
+
   .nav-open {
     @apply overflow-y-hidden fixed w-full top-0 glass-effect right-0 min-h-screen flex justify-center items-center text-center uppercase gap-7 flex-col md:flex z-40;
   }
 
   .nav-close {
-    @apply hidden md:flex md:justify-self-end md:flex-row md:gap-2 w-1/2 justify-between;
+    @apply hidden md:flex md:justify-self-end md:flex-row md:gap-2 justify-between;
+  }
+
+  .cart-icons {
+    @apply text-2xl cursor-pointer ml-auto text-blackText hover:scale-110 duration-300 transition-all;
   }
 
   /* hero section styles */
@@ -154,5 +170,26 @@ body {
 
   .footer div span {
     @apply text-2xl text-blackText flex justify-center items-center gap-10;
+  }
+
+  /* Menu Styles */
+  .dishes-row {
+    @apply mt-5 flex flex-col justify-center items-center overflow-x-scroll;
+  }
+
+  .dishes-row .menu-link__not-active {
+    @apply bg-white shadow-lg rounded-lg py-5 px-3 text-center flex flex-col items-center justify-center cursor-pointer gap-2 min-w-[7rem] text-sm;
+  }
+
+  .dishes-row .menu-link__not-active span {
+    @apply bg-pepperRed text-2xl p-3 rounded-full text-babyPinkBg;
+  }
+
+  .dishes-row .menu-link__active {
+    @apply bg-pepperRed shadow-lg rounded-lg text-babyPinkBg py-5 px-3 text-center flex flex-col items-center justify-center cursor-pointer gap-2 min-w-[7rem] text-sm;
+  }
+
+  .dishes-row .menu-link__active span {
+    @apply bg-babyPinkBg text-2xl p-3 rounded-full text-blackText;
   }
 }

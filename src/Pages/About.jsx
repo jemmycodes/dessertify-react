@@ -1,7 +1,7 @@
-import Layout from "../Components/Layout/Layout";
+import Layout from "../Components/Layout/RootLayout";
 
 function About() {
-  return <Layout>About</Layout>;
+  return <>About</>;
 }
 
 export default About;

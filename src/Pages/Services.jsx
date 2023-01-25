@@ -1,7 +1,7 @@
-import Layout from "../Components/Layout/Layout";
+import Layout from "../Components/Layout/RootLayout";
 
 function Services() {
-  return <Layout>Services</Layout>;
+  return <>Services</>;
 }
 
 export default Services;

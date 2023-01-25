@@ -15,11 +15,14 @@ function MenuCards(props) {
         </span>
       </div>
       <div className="text-right space-y-1">
-        <h3 className="text-xl">{props.title}</h3>
-        <h4 className="text-xs">{props.description}</h4>
+        <h3 className="text-xl ml-auto max-w-[15rem]">{props.title}</h3>
+        <h4 className="text-xs  ml-auto max-w-[15rem]">
+          <span className="font-bold italic"> Category: &nbsp;</span>
+          {props.category === "Ice_Cream" ? "Ice Cream" : props.category}
+        </h4>
         <p className="font-bold">
           <span className=" text-pepperRed">₦</span>
-          {props.price}
+          {(props.price * 100).toFixed(0)}
         </p>
       </div>
     </div>

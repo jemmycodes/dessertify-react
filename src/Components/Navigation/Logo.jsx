@@ -3,7 +3,7 @@ import Image from "../Ui/Image";
 
 function Logo() {
   return (
-    <li className="flex items-center hover-scale-effect">
+    <div className="flex items-center hover-scale-effect">
       <Image
         src={logo}
         alt="Logo"
@@ -12,7 +12,7 @@ function Logo() {
         height="100"
       />
       <p className="font-bold text-xl">JemmyFoods</p>
-    </li>
+    </div>
   );
 }
 

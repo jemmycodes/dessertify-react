@@ -1,63 +1,63 @@
 import Image from "./Image";
-import desserts from "../../assets/food-images/desserts.avif";
-import burger from "../../assets/food-images/burger.avif";
-import chocolates from "../../assets/food-images/chocolates.avif";
-import drinks from "../../assets/food-images/drinks.avif";
+import drink from "../../assets/d5.png";
+import fruit1 from "../../assets/f1.png";
+import fruit2 from "../../assets/f9.png";
+import icecream from "../../assets/i7.png";
 
 function HeroCard() {
   return (
     <section className="hero-card-overlay-section">
       <div className="hero-section__glass-card">
         <Image
-          src={burger}
+          src={drink}
           alt="Gramercy Tavern"
           width={130}
           height={130}
-          className="hero-glass-effect__img"
+          className="hero-glass-effect__img  max-w-[3rem] translate-x-6"
         />
 
-        <h3>Gramercy Tavern</h3>
+        <h3>Sprite</h3>
         <h3>
-          <span>$</span>32.99
+          <span>₦</span>800
         </h3>
       </div>
       <div className="hero-section__glass-card">
         <Image
-          src={desserts}
+          src={fruit1}
           alt="Killer Brownie"
           width={130}
           height={130}
           className="hero-glass-effect__img"
         />
-        <h3>Killer Brownie</h3>
+        <h3>Strawberry</h3>
         <h3>
-          <span>$</span>12.99
+          <span>₦</span>1200
         </h3>
       </div>
       <div className="hero-section__glass-card">
         <Image
-          src={chocolates}
+          src={fruit2}
           alt="Jacques Torres Chocolate"
           width={130}
           height={130}
           className="hero-glass-effect__img"
         />
-        <h3>Jacques Torres</h3>
+        <h3>Bananas</h3>
         <h3>
-          <span>$</span>19.00
+          <span>₦</span>1200
         </h3>
       </div>
       <div className="hero-section__glass-card">
         <Image
-          src={drinks}
+          src={icecream}
           alt="Guy Fieri"
           width={130}
           height={130}
-          className="hero-glass-effect__img"
+          className="hero-glass-effect__img max-w-[3rem] translate-x-6"
         />
-        <h3>Guy Fieri Drink</h3>
+        <h3>Ice Cream</h3>
         <h3>
-          <span>$</span>69.00
+          <span>₦</span>1700
         </h3>
       </div>
     </section>

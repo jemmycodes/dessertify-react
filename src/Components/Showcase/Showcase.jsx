@@ -1,26 +1,17 @@
-import { useEffect, useState } from "react";
-import useHttp from "../hooks/use-http";
 import { MdOutlineNavigateNext } from "react-icons/md";
 import { MdOutlineNavigateBefore } from "react-icons/md";
 import ErrorImage from "../Ui/ErrorImage";
 import MenuCards from "../Ui/MenuCards";
 
-function Showcase() {
-  const [isLoading, error, menu, fetchBestFoods] = useHttp(
-    "https://free-food-menus-api-production.up.railway.app/burgers"
-  );
-
-  useEffect(() => {
-    fetchBestFoods();
-  }, []);
-
-  const menuCard = menu.map((menu) => (
+function Showcase({ data }) {
+  console.log(data);
+  const menuCard = data.map((menu, index) => (
     <MenuCards
-      key={menu.id}
+      key={menu._id}
       title={menu.name}
-      src={menu.img}
-      price={menu.price.toString()}
-      description={menu.dsc}
+      src={menu.photoUrl}
+      price={index === 0 ? 2 : index}
+      category={menu.category}
     />
   ));
 
@@ -37,15 +28,7 @@ function Showcase() {
           </span>
         </div>
       </div>
-      <div className="our-best-foods-section">
-        {error && <ErrorImage />}
-        {isLoading && (
-          <p className="font-bold text-center text-orange">
-            Fetching best Foods...
-          </p>
-        )}
-        {!isLoading && <>{menuCard}</>}
-      </div>
+      <div className="our-best-foods-section">{menuCard}</div>
     </section>
   );
 }
