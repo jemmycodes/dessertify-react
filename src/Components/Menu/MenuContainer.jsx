@@ -13,7 +13,7 @@ function MenuContainer() {
     <MenuCards
       key={menu._id}
       title={menu.name}
-      src={menu.image}
+      src={menu.photoUrl}
       category={menu.category}
       price={index === 0 ? 2 : index}
     />

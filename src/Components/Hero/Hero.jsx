@@ -7,15 +7,14 @@ function Hero() {
     <section className="hero-section">
       <div className="hero-text-section">
         <p>
-          The Safest Online Food Ordering Service in
+          The Safest Online Desserts Ordering Service in
           <span className="text-orange"> Nigeria</span>
         </p>
         <p>
-          The leading online Food Service enterprise that ensures you get your
+          The leading online Dessert Ordering service that ensures you get your
           desired food, drinks or snacks to satisfy your taste buds! No matter
-          where you may be in Africa, from the East of Africa, Kenya, to the
-          West, Nigeria, Ghana to the South African part and also to the Farther
-          North of Africa, we've got you covered!
+          where you may be in Nigeria, from the East to the West, up North and
+          down South, we've got you covered!
         </p>
         <div>
           <button>Order now</button>

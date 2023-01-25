@@ -18,8 +18,8 @@ function Showcase({ data }) {
   return (
     <section className="py-3">
       <div className="flex justify-between items-center mb-3">
-        <p className="text-3xl">Our Best Foods</p>
-        <div className="flex gap-4">
+        <p className="text-3xl">Our Best Offers</p>
+        <div className="md:flex gap-4 hidden">
           <span className="bg-orange text-white text-3xl rounded-md">
             <MdOutlineNavigateBefore />
           </span>
@@ -28,7 +28,7 @@ function Showcase({ data }) {
           </span>
         </div>
       </div>
-      <div className="our-best-foods-section">{menuCard}</div>
+      <div className="our-best-foods-section w-full">{menuCard}</div>
     </section>
   );
 }

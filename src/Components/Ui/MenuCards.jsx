@@ -8,7 +8,7 @@ function MenuCards(props) {
         <Image
           src={props.src}
           alt={props.title}
-          className="max-w-[7rem] rounded-full"
+          className="w-28 h-28 object-cover rounded-full"
         />
         <span className="cart--icon">
           <TbShoppingCartPlus />
