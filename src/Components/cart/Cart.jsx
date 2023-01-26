@@ -28,7 +28,7 @@ function Cart() {
     <CartLayout>
       {cartItems.length > 0 ? (
         <div className="cart-container">
-          <div className="flex gap-2 flex-col h-[60vh] hide-scroll-bar overflow-y-scroll">
+          <div className="flex gap-2 flex-col h-[45vh] hide-scroll-bar overflow-y-scroll">
             {itemsInCart}
           </div>
           <div className="text-ashText">
