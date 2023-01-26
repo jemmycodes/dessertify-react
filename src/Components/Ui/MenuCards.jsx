@@ -1,7 +1,30 @@
 import Image from "./Image";
 import { TbShoppingCartPlus } from "react-icons/tb";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/slices/cartSlice";
 
 function MenuCards(props) {
+  // format the price coming from props
+  const price = (props.price * 100).toFixed(0);
+
+  // configure the cart items
+  // const cartItems = useSelector((state) => state.cart.cart);
+  const dispatch = useDispatch();
+
+  // reducer actions to add to cart
+  const addToCartHandler = () => {
+    dispatch(
+      addToCart({
+        id: props.id,
+        name: props.title,
+        image: props.src,
+        price,
+      })
+    );
+  };
+
+  // console.log(cartItems);
+
   return (
     <div className="menu--card">
       <div className="menu--card__image">
@@ -11,7 +34,7 @@ function MenuCards(props) {
           className="w-28 h-28 object-cover rounded-full"
         />
         <span className="cart--icon">
-          <TbShoppingCartPlus />
+          <TbShoppingCartPlus onClick={addToCartHandler} />
         </span>
       </div>
       <div className="text-right space-y-1">
@@ -22,7 +45,7 @@ function MenuCards(props) {
         </h4>
         <p className="font-bold">
           <span className=" text-pepperRed">₦</span>
-          {(props.price * 100).toFixed(0)}
+          {price}
         </p>
       </div>
     </div>

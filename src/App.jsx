@@ -8,11 +8,14 @@ import Services from "./Pages/Services";
 import RootLayout from "./Components/Layout/RootLayout";
 import Index from "./Components/Ui/Index";
 import MenuContainer from "./Components/Menu/MenuContainer";
-import AppProvider from "./context/AppProvider";
 import { useEffect } from "react";
 import { loader as getCurrentPageData } from "./Components/Menu/MenuContainer";
+import Cart from "./Components/cart/Cart";
+import { useSelector } from "react-redux";
 
 function App() {
+  const showCart = useSelector((state) => state.cart.showCart);
+
   // getting menu data from an external API
   const getData = async () => {
     const response = await fetch(
@@ -20,7 +23,7 @@ function App() {
     );
     const data = await response.json();
 
-    // store data in local storage
+    // store data from API in local storage
     localStorage.setItem("menu", JSON.stringify(data.data));
   };
 
@@ -63,9 +66,10 @@ function App() {
   ]);
 
   return (
-    <AppProvider>
-      <RouterProvider router={router} />;
-    </AppProvider>
+    <>
+      <RouterProvider router={router} />
+      {showCart && <Cart />}
+    </>
   );
 }
 

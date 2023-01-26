@@ -1,12 +1,12 @@
 import { MdOutlineNavigateNext } from "react-icons/md";
 import { MdOutlineNavigateBefore } from "react-icons/md";
-import ErrorImage from "../Ui/ErrorImage";
 import MenuCards from "../Ui/MenuCards";
 
 function Showcase({ data }) {
   const menuCard = data.map((menu, index) => (
     <MenuCards
       key={menu._id}
+      id={menu._id}
       title={menu.name}
       src={menu.photoUrl}
       price={index === 0 ? 2 : index}
