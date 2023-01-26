@@ -184,7 +184,7 @@ div ul::-webkit-scrollbar,
 
   /* Cart */
   .cart-container {
-    @apply fixed top-3 md:right-0 right-1/2 translate-x-1/2 md:translate-x-0 space-y-4 rounded-t-[8%] mt-[7%] flex justify-between flex-col bg-[#1C1C1C] w-[320px] p-6 min-h-[87vh];
+    @apply fixed top-3 md:right-0 right-1/2 translate-x-1/2 md:translate-x-0 space-y-4 rounded-t-[8%] mt-[20%] flex justify-between flex-col bg-[#1C1C1C] w-[320px] px-2 py-6 min-h-[87vh];
   }
   /* Footer styles */
   footer {
