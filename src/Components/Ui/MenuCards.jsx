@@ -5,10 +5,10 @@ import { addToCart } from "../../store/slices/cartSlice";
 
 function MenuCards(props) {
   // format the price coming from props
-  const price = (props.price * 100).toFixed(0);
+  const price = +(props.price * 100).toFixed(0);
 
   // configure the cart items
-  // const cartItems = useSelector((state) => state.cart.cart);
+
   const dispatch = useDispatch();
 
   // reducer actions to add to cart
@@ -18,12 +18,11 @@ function MenuCards(props) {
         id: props.id,
         name: props.title,
         image: props.src,
+        quantity: 1,
         price,
       })
     );
   };
-
-  // console.log(cartItems);
 
   return (
     <div className="menu--card">

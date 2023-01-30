@@ -3,11 +3,12 @@ import { BiArrowBack, BiRefresh } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import CartItems from "./CartItems";
 import Image from "../Ui/Image";
-import { showCart } from "../../store/slices/cartSlice";
+import { showCart, clearCart } from "../../store/slices/cartSlice";
 import emptyCart from "../../assets/emptyCart.svg";
 
 function Cart() {
   const cartItems = useSelector((state) => state.cart.cart);
+  const total = useSelector((state) => state.cart.totalAmount);
   const dispatch = useDispatch();
 
   const itemsInCart = cartItems.map((item) => (
@@ -17,8 +18,13 @@ function Cart() {
       price={item.price}
       id={item.id}
       key={item.id}
+      amount={item.quantity}
     />
   ));
+
+  const clearCartHandler = () => {
+    dispatch(clearCart());
+  };
 
   const hideCartHandler = () => {
     dispatch(showCart());
@@ -37,24 +43,23 @@ function Cart() {
               <p>-</p>
               <p>
                 <span className="text-pepperRed font-bold">₦</span>
-                26
+                {total}
               </p>
             </div>
             <div className="flex mb-2 justify-between">
               <p>Delivery</p>
               <p>-</p>
               <p>
-                <span className="text-pepperRed font-bold">₦</span>
-                26
+                <span className="text-pepperRed font-bold">₦</span>0
               </p>
             </div>
             <hr />
             <div className="flex mt-3 text-white justify-between">
-              <p>Sub Total</p>
+              <p>Total</p>
               <p>-</p>
               <p>
                 <span className="text-pepperRed font-bold">₦</span>
-                26
+                {total}
               </p>
             </div>
             <button className="bg-orange w-full mt-2 text-white rounded-3xl py-2">
@@ -80,7 +85,10 @@ function Cart() {
         <h3>Cart</h3>
         <span className="flex items-center  gap-1">
           <p>Clear Cart</p>
-          <BiRefresh className="text-3xl text-orange cursor-pointer" />
+          <BiRefresh
+            onClick={clearCartHandler}
+            className="text-3xl text-orange cursor-pointer"
+          />
         </span>
       </div>
     </CartLayout>
