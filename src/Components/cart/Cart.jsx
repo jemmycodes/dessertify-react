@@ -5,6 +5,7 @@ import CartItems from "./CartItems";
 import Image from "../Ui/Image";
 import { showCart, clearCart } from "../../store/slices/cartSlice";
 import emptyCart from "../../assets/emptyCart.svg";
+import swal from "sweetalert";
 
 function Cart() {
   const cartItems = useSelector((state) => state.cart.cart);
@@ -21,6 +22,16 @@ function Cart() {
       amount={item.quantity}
     />
   ));
+
+  const orderItemHandler = () => {
+    swal({
+      title: "Order Successful!",
+      text: "Your order is on it's way!",
+      icon: "success",
+      button: "Ok",
+    });
+    dispatch(clearCart());
+  };
 
   const clearCartHandler = () => {
     dispatch(clearCart());
@@ -62,7 +73,10 @@ function Cart() {
                 {total}
               </p>
             </div>
-            <button className="bg-orange w-full mt-2 text-white rounded-3xl py-2">
+            <button
+              className="bg-orange w-full mt-2 text-white rounded-3xl py-2"
+              onClick={orderItemHandler}
+            >
               Order Now
             </button>
           </div>

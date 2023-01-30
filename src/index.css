@@ -81,7 +81,7 @@ div ul::-webkit-scrollbar,
   }
 
   .cart-icons {
-    @apply text-2xl cursor-pointer ml-auto text-blackText hover:scale-110 duration-300 transition-all;
+    @apply text-4xl cursor-pointer ml-auto text-blackText hover:scale-110 duration-300 transition-all;
   }
 
   /* hero section styles */

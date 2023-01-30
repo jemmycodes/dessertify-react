@@ -5,12 +5,13 @@ import Logo from "./Logo";
 import { TiShoppingCart } from "react-icons/ti";
 import { FiLogIn } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { showCart } from "../../store/slices/cartSlice";
 
 function Navigation() {
   const [navigation, setNavigation] = useState(false);
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart.cart);
 
   const navigationHandler = () => {
     setNavigation((prevState) => !prevState);
@@ -35,7 +36,9 @@ function Navigation() {
             className="text-4xl md:bg-blackText  cursor-pointer ml-auto"
             onClick={showCartHandler}
           />
-          <div className="p-2 bg-pepperRed rounded-full absolute top-0 right-0"></div>
+          <div className="text-white px-[.3rem] bg-pepperRed rounded-full absolute top-0 right-0">
+            {cart.length}
+          </div>
         </span>
       )}
       {navigation && (
@@ -112,7 +115,9 @@ function Navigation() {
           )}
           <span className="relative hidden md:flex ">
             <TiShoppingCart className="cart-icons" onClick={showCartHandler} />
-            <div className=" bg-pepperRed p-1 rounded-full absolute top-0 right-0 "></div>
+            <div className="text-white bg-pepperRed px-2  text-xs cursor-pointer rounded-full absolute top-0 right-0 ">
+              {cart.length}
+            </div>
           </span>
         </div>
       </ul>
