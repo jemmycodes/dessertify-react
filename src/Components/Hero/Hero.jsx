@@ -1,6 +1,7 @@
 import heroBg from "../../assets/hero-bg.png";
 import Image from "../Ui/Image";
 import HeroCard from "../Ui/HeroCard";
+import { NavLink } from "react-router-dom";
 
 function Hero() {
   return (
@@ -17,7 +18,9 @@ function Hero() {
           down South, we've got you covered!
         </p>
         <div>
-          <button>Order now</button>
+          <NavLink to="/menu" className="order-now-btn">
+            Order now
+          </NavLink>
         </div>
       </div>
       {/* white-striped layout with orange background */}

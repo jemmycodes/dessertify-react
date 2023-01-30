@@ -93,8 +93,8 @@ div ul::-webkit-scrollbar,
     @apply flex w-full mt-5;
   }
 
-  .hero-section button {
-    @apply w-full md:w-fit text-white font-bold bg-orange py-3 px-7  rounded-lg;
+  .hero-section .order-now-btn {
+    @apply w-full md:w-fit text-white font-bold bg-orange py-3 px-7 text-center  rounded-lg;
   }
 
   .hero-section .hero-text-section {
