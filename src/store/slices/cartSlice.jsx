@@ -1,9 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { startTransition } from "react";
+
+const items =
+  localStorage.getItem("cartItems") !== null
+    ? JSON.parse(localStorage.getItem("cartItems"))
+    : [];
+
+const totalAmount =
+  localStorage.getItem("totalAmount") !== null
+    ? localStorage.getItem("totalAmount")
+    : 0;
+
+const storeToLocalStorage = (cart, amount) => {
+  localStorage.setItem("cartItems", JSON.stringify(cart));
+  localStorage.setItem("totalAmount", JSON.stringify(amount));
+};
 
 const initialState = {
-  cart: [],
-  totalAmount: 0,
+  cart: items,
+  totalAmount: Number(totalAmount),
   showCart: false,
 };
 
@@ -22,6 +36,10 @@ const cartSlice = createSlice({
       } else {
         existingItem.quantity++;
       }
+      storeToLocalStorage(
+        state.cart.map((item) => item),
+        state.totalAmount
+      );
     },
     showCart(state) {
       state.showCart = !state.showCart;
@@ -38,10 +56,18 @@ const cartSlice = createSlice({
       } else {
         existingItem.quantity--;
       }
+      storeToLocalStorage(
+        state.cart.map((item) => item),
+        state.totalAmount
+      );
     },
     clearCart(state) {
       state.cart = [];
       state.totalAmount = 0;
+      storeToLocalStorage(
+        state.cart.map((item) => item),
+        state.totalAmount
+      );
     },
   },
 });
