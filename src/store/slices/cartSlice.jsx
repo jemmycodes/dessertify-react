@@ -1,14 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const items =
-  localStorage.getItem("cartItems") !== null
-    ? JSON.parse(localStorage.getItem("cartItems"))
-    : [];
+const items = JSON.parse(localStorage.getItem("cartItems")) ?? [];
 
-const totalAmount =
-  localStorage.getItem("totalAmount") !== null
-    ? localStorage.getItem("totalAmount")
-    : 0;
+const totalAmount = localStorage.getItem("totalAmount") ?? 0;
 
 const storeToLocalStorage = (cart, amount) => {
   localStorage.setItem("cartItems", JSON.stringify(cart));
