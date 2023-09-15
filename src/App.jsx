@@ -1,7 +1,8 @@
+import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import About from "./Pages/About";
 import ErrorPage from "./Components/ErrorElement/ErrorPage";
-import Home from "./Pages/Home";
+import { Home } from "./Pages/index.js";
 import Login from "./Pages/Login";
 import Menu from "./Pages/Menu";
 import Services from "./Pages/Services";
@@ -40,7 +41,7 @@ function App() {
         {
           errorElement: <ErrorPage />,
           children: [
-            { path: "/", element: <Home /> },
+            { index: true, element: <Home /> },
             {
               path: "/menu",
               element: <Menu />,

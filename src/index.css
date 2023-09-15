@@ -2,158 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+/* @font-face {
+  font-family: "KeplerExtraBold";
+  src: url("./assets/fonts/KeplerBlack.otf") format("otf");
+} */
+
 /* vanilla css styles */
 body {
   font-family: "Poppins", sans-serif;
 }
 
-/* Glassmorphism effect with css */
-.glass-effect {
-  background: rgba(255, 255, 255, 0.62);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(7.6px);
-  -webkit-backdrop-filter: blur(7.6px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.hero-section-glass-effect {
-  background: rgba(255, 255, 255, 0.52);
-  backdrop-filter: blur(6.9px);
-  -webkit-backdrop-filter: blur(6.9px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.menu-card-glass-effect {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera  */
-div ul::-webkit-scrollbar,
-.dishes-row::-webkit-scrollbar,
-.our-best-foods-section::-webkit-scrollbar,
-.hide-scroll-bar::-webkit-scrollbar {
-  display: none;
-}
-
-/* vanilla css media queries  */
-@media screen and (max-width: 350px) {
-  .hero-section__glass-card {
-    max-width: 7rem;
-  }
-
-  .hero-section__glass-card h3:first-of-type {
-    font-size: 0.7rem;
-  }
-}
-
 /* Tailwind custom classes */
 @layer base {
-  /* general page layout */
-  main,
-  .footer {
-    @apply max-w-[1920px] bg-ashBgColor px-6 mx-auto;
+  nav#home-nav li a {
+    @apply font-bold text-2xl;
   }
 
-  /* navbar styles */
-  nav {
-    @apply flex  my-2 items-center justify-between pr-8 pl-5 max-w-[1920px] mx-auto text-blackText;
+  section#hero nav a p {
+    @apply text-xs;
   }
-
-  nav ul li,
-  .hover-scale-effect {
-    @apply hover:scale-110 duration-300 transition-all cursor-pointer;
-  }
-
-  .active-link-class {
-    @apply border-b-2  border-orange transition-all duration-200;
-  }
-
-  .nav-open {
-    @apply overflow-y-hidden fixed w-full top-0 glass-effect right-0 min-h-screen flex justify-center items-center text-center uppercase gap-7 flex-col md:flex z-40;
-  }
-
-  .nav-close {
-    @apply hidden md:flex md:justify-self-end md:flex-row md:gap-2 justify-between;
-  }
-
-  .cart-icons {
-    @apply text-4xl cursor-pointer ml-auto text-blackText hover:scale-110 duration-300 transition-all;
-  }
-
-  /* hero section styles */
-  .hero-section {
-    @apply py-12 flex flex-col w-full md:justify-between justify-center items-center md:flex-row lg:gap-0 gap-16;
-  }
-
-  .hero-section div div {
-    @apply flex w-full mt-5;
-  }
-
-  .hero-section .order-now-btn {
-    @apply w-full md:w-fit text-white font-bold bg-orange py-3 px-7 text-center  rounded-lg;
-  }
-
-  .hero-section .hero-text-section {
-    @apply md:w-3/4 lg:w-1/2;
-  }
-
-  .hero-section .hero-text-section p:first-of-type {
-    @apply text-4xl lg:text-6xl  mb-4 md:text-left font-black text-center;
-  }
-
-  .hero-section .hero-text-section p:last-of-type {
-    @apply text-center md:text-left;
-  }
-
-  .hero-card-section {
-    @apply flex md:justify-end w-full md:mt-10 lg:w-1/2;
-  }
-
-  .hero-img-bg {
-    @apply w-screen object-cover rounded-xl ml-auto md:w-auto lg:h-[500px] h-[440px] lg:w-auto;
-  }
-
-  .hero-section__glass-card {
-    @apply max-w-[8rem] max-h-fit flex flex-col px-5 py-5 text-center rounded-2xl hero-section-glass-effect;
-  }
-
-  .hero-card-overlay-section {
-    @apply flex flex-wrap absolute gap-x-5 md:gap-y-16 mt-12 md:mt-7  md:max-w-[32rem] lg:max-w-sm lg:left-44 justify-center items-center z-20 gap-y-8;
-  }
-
-  .hero-glass-effect__img {
-    @apply -mt-16 rounded-full w-20 object-cover;
-  }
-
-  .hero-card-overlay-section .hero-section__glass-card h3:first-of-type {
-    @apply pt-2 font-bold pb-3;
-  }
-
-  .hero-card-overlay-section .hero-section__glass-card h3:last-of-type span {
-    @apply text-red-600 font-bold;
-  }
-
-  /* showcase styles */
-  .our-best-foods-section {
-    @apply bg-babyPinkBg flex justify-center p-2 rounded-md mt-2 gap-5 overflow-x-scroll;
-  }
-
-  /* Menu card styles */
-
-  div.menu--card {
-    @apply min-w-[300px] p-2 space-y-2 menu-card-glass-effect;
-  }
-
-  .menu--card__image {
-    @apply flex justify-between items-center;
-  }
-
-  .cart--icon {
-    @apply bg-pepperRed cursor-pointer text-white rounded-full p-2 text-2xl;
+  nav#home-nav li {
+    @apply flex flex-col justify-center gap-1 items-center md:hover:text-orange;
   }
 
   /* Menu Styles */

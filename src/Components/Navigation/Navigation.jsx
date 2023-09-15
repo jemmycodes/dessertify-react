@@ -1,138 +1,48 @@
-import { BiMenuAltRight } from "react-icons/bi";
-import { GiKnifeFork } from "react-icons/gi";
-import { useState } from "react";
-import Logo from "./Logo";
-import { TiShoppingCart } from "react-icons/ti";
-import { FiLogIn } from "react-icons/fi";
+import React from "react";
 import { NavLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { showCart } from "../../store/slices/cartSlice";
 
-function Navigation() {
-  const [navigation, setNavigation] = useState(false);
-  const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart.cart);
+import {
+  MdOutlineRestaurantMenu,
+  MdShoppingCart,
+  MdHome,
+} from "react-icons/md";
+import Logo from "./Logo";
 
-  const navigationHandler = () => {
-    setNavigation((prevState) => !prevState);
-  };
+const assignActiveClass = ({ isActive }) =>
+  isActive ? "p-2 bg-orange text-white rounded-full" : "";
 
-  const showCartHandler = () => {
-    dispatch(showCart());
-  };
-
+const Navigation = () => {
   return (
-    <nav>
-      <Logo />
-      {!navigation && (
-        <BiMenuAltRight
-          className="text-4xl cursor-pointer md:hidden ml-auto"
-          onClick={navigationHandler}
-        />
-      )}
-      {navigation && (
-        <span className="relative flex z-50 -translate-x-48 mr-auto">
-          <TiShoppingCart
-            className="text-4xl md:bg-blackText  cursor-pointer ml-auto"
-            onClick={showCartHandler}
-          />
-          <div className="text-white px-[.3rem] bg-pepperRed rounded-full absolute top-0 right-0">
-            {cart.length}
-          </div>
-        </span>
-      )}
-      {navigation && (
-        <GiKnifeFork
-          className="text-4xl cursor-pointer z-50 ml-auto"
-          onClick={navigationHandler}
-        />
-      )}
-      <ul className={navigation ? "nav-open" : "nav-close"}>
-        <div className="flex md:flex-row flex-col items-center  gap-6">
-          <li>
-            <NavLink
-              to="/"
-              onClick={() => setNavigation(false)}
-              className={({ isActive }) =>
-                isActive ? "active-link-class" : ""
-              }
-            >
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/menu"
-              onClick={() => setNavigation(false)}
-              className={({ isActive }) =>
-                isActive ? "active-link-class" : ""
-              }
-            >
-              Menu
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/about"
-              onClick={() => setNavigation(false)}
-              className={({ isActive }) =>
-                isActive ? "active-link-class" : ""
-              }
-            >
-              About
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink
-              to="/services"
-              onClick={() => setNavigation(false)}
-              className={({ isActive }) =>
-                isActive ? "active-link-class" : ""
-              }
-            >
-              Services
-            </NavLink>
-          </li>
-          <li>Contact us</li>
-
-          {navigation && (
-            <li>
-              <NavLink to="/home" onClick={() => setNavigation(false)}>
-                <Logo />
-              </NavLink>
-            </li>
-          )}
-          {navigation && (
-            <li>
-              <NavLink to="/login" onClick={() => setNavigation(false)}>
-                <span className=" gap-1 items-center flex justify-center">
-                  Login
-                  <FiLogIn />
-                </span>
-              </NavLink>
-            </li>
-          )}
-          <span className="relative hidden md:flex ">
-            <TiShoppingCart className="cart-icons" onClick={showCartHandler} />
-            <div className="text-white bg-pepperRed px-2  text-xs cursor-pointer rounded-full absolute top-0 right-0 ">
-              {cart.length}
-            </div>
-          </span>
-        </div>
+    <nav
+      id="home-nav"
+      className="bg-white/30 md:flex-col md:flex shadow-md backdrop-blur-sm text-black/70 fixed  bottom-2 z-20 w-[90vw] max-w-sm rounded-full left-1/2 p-3 -translate-x-1/2 md:sticky md:left-0 md:top-0 md:w-full md:h-screen md:-translate-x-0 md:rounded-none md:justify-between "
+    >
+      <div className="hidden md:block">
+        <Logo />
+      </div>
+      <ul className="flex items-center justify-around w-full md:flex-col md:gap-10 md:justify-center">
+        <li>
+          <NavLink to="/" className={assignActiveClass}>
+            <MdHome />
+          </NavLink>
+          {/* <p>Home</p> */}
+        </li>
+        <li>
+          <NavLink to="menu" className={assignActiveClass}>
+            <MdOutlineRestaurantMenu />
+          </NavLink>
+          {/* <p>Menu</p> */}
+        </li>
+        <li>
+          <NavLink to="cart" className={assignActiveClass}>
+            <MdShoppingCart />
+          </NavLink>
+          {/* <p>Cart</p> */}
+        </li>
       </ul>
-      <NavLink
-        to="/login"
-        onClick={() => setNavigation(false)}
-        className={({ isActive }) => (isActive ? "active-link-class" : "")}
-      >
-        <span className=" gap-1 items-center md:flex hidden border px-2 py-1 rounded-lg">
-          Login
-          <FiLogIn />
-        </span>
-      </NavLink>
+      <div></div>
     </nav>
   );
-}
+};
 
 export default Navigation;

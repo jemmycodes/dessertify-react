@@ -1,5 +1,5 @@
 import Image from "../Ui/Image";
-import image from "../../assets/d5.png";
+import image from "../../assets/donut.png";
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { addToCart, removeFromCart } from "../../store/slices/cartSlice";

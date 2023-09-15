@@ -1,14 +1,10 @@
-import Hero from "../Components/Hero/Hero";
-import Showcase from "../Components/Showcase/Showcase";
+import React from "react";
+import { HomeComponent } from "../Components/index.js";
 
 function Home() {
-  const menuData = JSON.parse(localStorage.getItem("menu"));
-  const data = menuData.splice(-20);
-
   return (
     <>
-      <Hero />
-      <Showcase data={data} />
+      <HomeComponent />
     </>
   );
 }
