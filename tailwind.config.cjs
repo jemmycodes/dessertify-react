@@ -12,15 +12,17 @@ module.exports = {
         ashText: "#9b9fa7",
         pepperRed: "#e80013",
         blackText: "#515151",
+        "dark-blue": "#030021",
       },
       fontFamily: {
         "frank-ruhl": ["Frank Ruhl Libre", "serif"],
-        poppins: ["Poppins", "san-serif"],
+        rubik: ["Rubik", "sans-serif"],
       },
       gridTemplateColumns: {
         "root-layout": "5rem 1fr",
+        "menu-items": "repeat(auto-fit, minmax(18rem, 1fr))",
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar-hide")],
 };

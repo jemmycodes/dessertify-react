@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
 import {
   MdOutlineRestaurantMenu,
   MdShoppingCart,
@@ -28,7 +27,7 @@ const Navigation = () => {
           {/* <p>Home</p> */}
         </li>
         <li>
-          <NavLink to="menu" className={assignActiveClass}>
+          <NavLink to="/menu/all" className={assignActiveClass}>
             <MdOutlineRestaurantMenu />
           </NavLink>
           {/* <p>Menu</p> */}

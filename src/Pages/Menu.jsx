@@ -1,14 +1,14 @@
 import React from "react";
+
 import { Outlet } from "react-router-dom";
-import MenuNavigation from "../Components/Navigation/MenuNavigation";
+import { MenuNavigation } from "../Components";
 
 function Menu() {
   return (
-    <>
-      <p className="text-center text-3xl pt-4 text-blackText">Our Hot Dishes</p>
+    <main className="p-6 bg-[#f8f8f8] min-h-screen">
       <MenuNavigation />
       <Outlet />
-    </>
+    </main>
   );
 }
 

@@ -5,13 +5,12 @@ import { Outlet } from "react-router-dom";
 
 function RootLayout() {
   return (
-    <main className="md:grid grid-cols-root-layout">
+    <div className="md:grid grid-cols-root-layout">
       <Navigation />
-      <main>
+      <div>
         <Outlet />
-      </main>
-      {/* <Footer /> */}
-    </main>
+      </div>
+    </div>
   );
 }
 

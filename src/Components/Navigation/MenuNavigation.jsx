@@ -1,48 +1,32 @@
+import React from "react";
+import { icecream, cookies, donut, desserts } from "../../assets";
 import { NavLink } from "react-router-dom";
-import { BiCookie } from "react-icons/bi";
-import { MdOutlineIcecream } from "react-icons/md";
-import { GiDoughRoller } from "react-icons/gi";
 
-function MenuNavigation() {
+const assignActiveClass = ({ isActive }) =>
+  isActive ? "text-white  bg-orange" : "";
+
+export default function MenuNavigation() {
   return (
-    <div className="dishes-row">
-      <ul className="flex gap-6 items-center">
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? "menu-link__active" : "menu-link__not-active"
-          }
-          to="menu/Ice_Cream"
-        >
-          <span>
-            <MdOutlineIcecream />
-          </span>
-          Ice-Cream
+    <nav id="menu-navigation" className="overflow-scroll scrollbar-hide ">
+      <ul className="flex gap-3">
+        <NavLink className={assignActiveClass} to="desserts">
+          <img src={desserts} alt="" height="20" width="20" />
+
+          <p>All</p>
         </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? "menu-link__active" : "menu-link__not-active"
-          }
-          to="menu/Donut"
-        >
-          <span>
-            <GiDoughRoller />
-          </span>
-          Doughnuts
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? "menu-link__active" : "menu-link__not-active"
-          }
-          to="menu/Cookie"
-        >
-          <span>
-            <BiCookie />
-          </span>
-          Cookies
+        <NavLink className={assignActiveClass} to="Ice_Cream">
+          <img src={icecream} alt="" height="20" width="20" />
+          <p>Icecream</p>
+        </NavLink>{" "}
+        <NavLink className={assignActiveClass} to="Cookie">
+          <img src={cookies} alt="" height="20" width="20" />
+          <p>Cookies</p>
+        </NavLink>{" "}
+        <NavLink className={assignActiveClass} to="Donut">
+          <img src={donut} alt="" height="20" width="20" />
+          <p>Donuts</p>
         </NavLink>
       </ul>
-    </div>
+    </nav>
   );
 }
-
-export default MenuNavigation;
