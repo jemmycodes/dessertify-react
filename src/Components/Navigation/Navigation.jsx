@@ -27,7 +27,7 @@ const Navigation = () => {
           {/* <p>Home</p> */}
         </li>
         <li>
-          <NavLink to="/menu/all" className={assignActiveClass}>
+          <NavLink to="/menu/desserts" className={assignActiveClass}>
             <MdOutlineRestaurantMenu />
           </NavLink>
           {/* <p>Menu</p> */}

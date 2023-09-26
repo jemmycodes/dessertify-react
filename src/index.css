@@ -2,10 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @font-face {
-  font-family: "KeplerExtraBold";
-  src: url("./assets/fonts/KeplerBlack.otf") format("otf");
-} */
+/* Remove the number input arrows and other controls */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"] {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0; /* Optional: Adjust the spacing as needed */
+}
 
 /* vanilla css styles */
 body {
@@ -24,53 +28,6 @@ body {
   }
   nav#home-nav li {
     @apply flex flex-col justify-center gap-1 items-center md:hover:text-orange;
-  }
-
-  /* Menu Styles */
-  .dishes-row {
-    @apply mt-5 flex flex-col justify-center items-center overflow-x-scroll;
-  }
-
-  .dishes-row .menu-link__not-active {
-    @apply bg-white shadow-lg rounded-lg py-5 px-3 text-center flex flex-col items-center justify-center cursor-pointer gap-2 min-w-[7rem] text-sm;
-  }
-
-  .dishes-row .menu-link__not-active span {
-    @apply bg-pepperRed text-2xl p-3 rounded-full text-babyPinkBg;
-  }
-
-  .dishes-row .menu-link__active {
-    @apply bg-pepperRed shadow-lg rounded-lg text-babyPinkBg py-5 px-3 text-center flex flex-col items-center justify-center cursor-pointer gap-2 min-w-[7rem] text-sm;
-  }
-
-  .dishes-row .menu-link__active span {
-    @apply bg-babyPinkBg text-2xl p-3 rounded-full text-blackText;
-  }
-
-  /* Cart-contacct form layout */
-  .cart-contact-layout {
-    @apply fixed flex flex-col top-0 right-0 w-full md:w-[360px] z-50 bg-white min-h-screen;
-  }
-
-  /* Cart */
-  .cart-container {
-    @apply fixed top-3 md:right-0 right-1/2 translate-x-1/2 md:translate-x-0 space-y-4 rounded-t-[8%] mt-[3rem] flex justify-between flex-col bg-[#1C1C1C] w-[320px] px-2 py-6 min-h-[87vh];
-  }
-  /* Footer styles */
-  footer {
-    @apply py-5 flex flex-col;
-  }
-
-  .footer .footer__logo {
-    @apply flex  pb-6 w-full justify-center items-center mx-auto border-x-transparent md:justify-start  border-b-black border-2 border-t-transparent;
-  }
-
-  .footer .logo-text {
-    @apply text-xl text-blackText md:text-3xl font-bold;
-  }
-
-  .footer div span {
-    @apply text-2xl text-blackText flex justify-center items-center gap-10;
   }
 
   nav#menu-navigation ul a {

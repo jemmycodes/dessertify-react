@@ -41,7 +41,7 @@ const Home = () => {
               <p>Cookies</p>
             </NavLink>
           </nav>
-          <div className="relative w-full md:w-3/4 md:mx-0  mx-auto">
+          <form className="relative w-full md:w-3/4 md:mx-0  mx-auto">
             <input
               type="search"
               className="p-4 text-xs rounded-full w-full focus:outline-none focus:shadow-lg"
@@ -53,7 +53,7 @@ const Home = () => {
             >
               <BsArrowRight className="text-xl" />
             </button>
-          </div>
+          </form>
         </section>
         <figure>
           <LazyImage

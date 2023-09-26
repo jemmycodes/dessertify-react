@@ -1,52 +1,26 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useParams } from "react-router-dom";
+import React from "react";
 import { MenuItems } from "../index.js";
-import { useCallback } from "react";
+import { useMenu } from "../../context/MenuContext.jsx";
 
 const MenuLayout = () => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const { menutype } = useParams();
-
-  const presentUrl =
-    menutype === "desserts"
-      ? "https://freerandomapi.cyclic.app/api/v1/desserts?limit=100"
-      : `https://freerandomapi.cyclic.app/api/v1/desserts?category=${menutype}&limit=50`;
-
-  useEffect(() => {
-    setLoading(true);
-    const fetchMenu = async () => {
-      try {
-        const { data } = await axios.get(presentUrl);
-        setData(data.data);
-      } catch (error) {
-        console.error(error);
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchMenu();
-  }, [presentUrl]);
+  const { menu, error, loading } = useMenu();
+  console.log(menu);
 
   if (loading) return <p>Loading...</p>;
 
   if (error) return <p>Something went wrong!</p>;
 
   return (
-    <section className="grid gap-4 py-4 grid-cols-menu-items">
-      {data &&
-        data.map((item, index) => (
-          <MenuItems
-            image={item.photoUrl}
-            description={item.description}
-            key={item._id}
-            name={item.name}
-            price={index * 11}
-          />
-        ))}
+    <section className="grid gap-4 py-4 grid-cols-1 md:grid-cols-menu-items">
+      {menu.map((item, index) => (
+        <MenuItems
+          image={item.photoUrl}
+          description={item.description}
+          key={item._id}
+          name={item.name}
+          price={index * 11}
+        />
+      ))}
     </section>
   );
 };

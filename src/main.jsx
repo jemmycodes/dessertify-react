@@ -6,8 +6,12 @@ import "./index.css";
 
 import { StrictMode } from "react";
 
+import { MenuProvider } from "./context/MenuContext";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <MenuProvider>
+      <App />
+    </MenuProvider>
   </StrictMode>
 );
