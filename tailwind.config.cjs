@@ -2,13 +2,6 @@
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
-    screens: {
-      sm: "640px",
-      md: "915px",
-      lg: "1024px",
-      xl: "1280px",
-      "2xl": "1536px",
-    },
     extend: {
       colors: {
         orange: "#ed7c12",
@@ -27,7 +20,8 @@ module.exports = {
       },
       gridTemplateColumns: {
         "root-layout": "5rem 1fr",
-        "menu-items": "repeat(auto-fit, minmax( 20rem, 1fr))",
+        "menu-items": "repeat(auto-fit, minmax(20rem, 1fr))",
+        "menu-small-screens": "repeat(auto-fit, minmax(12rem, 1fr))",
       },
     },
   },

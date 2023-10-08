@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 const MenuContext = createContext();
