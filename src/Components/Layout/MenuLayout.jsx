@@ -2,14 +2,17 @@ import React from "react";
 import { MenuItems } from "../index.js";
 import { Metronome } from "@uiball/loaders";
 import { useFetch } from "../../hooks";
-import { useSearchParams, useLocation } from "react-router-dom";
-
-const url = "https://freerandomapi.cyclic.app/api/v1/desserts?limit=100";
+import { useSearchParams, useParams, useLocation } from "react-router-dom";
 
 const MenuLayout = () => {
-  const { data, loading, error } = useFetch(url);
+  const { menutype } = useParams();
+  const { pathname } = useLocation();
   const [searchParams] = useSearchParams();
-
+  const url =
+    pathname === "/menu/desserts"
+      ? "https://freerandomapi.cyclic.app/api/v1/desserts?limit=120"
+      : `https://freerandomapi.cyclic.app/api/v1/desserts?category=${menutype}`;
+  const { data, loading, error } = useFetch(url);
   const searchValue = searchParams.get("search")?.trim();
 
   if (loading)
@@ -22,13 +25,11 @@ const MenuLayout = () => {
   if (error) return <p>Something went wrong!</p>;
 
   if (searchValue) {
-    const filteredData = data.filter(
-      (item) =>
-        item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
-        item.description.toLowerCase().includes(searchValue.toLowerCase())
+    const filteredData = data.filter((item) =>
+      item.name.toLowerCase().includes(searchValue.toLowerCase())
     );
 
-    if (searchValue.length && filteredData.length < 1)
+    if (searchValue.length && !filteredData.length)
       return (
         <p>
           No result found for{" "}
@@ -52,6 +53,7 @@ const MenuLayout = () => {
   return data.map((item, index) => (
     <MenuItems
       key={item._id}
+      id={item._id}
       price={index * 10}
       description={item.description}
       name={item.name}

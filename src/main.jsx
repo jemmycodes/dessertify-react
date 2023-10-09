@@ -6,12 +6,12 @@ import "./index.css";
 
 import { StrictMode } from "react";
 
-import { MenuProvider } from "./context/MenuContext";
+import { CartProvider } from "./context/CartContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <MenuProvider>
+    <CartProvider>
       <App />
-    </MenuProvider>
+    </CartProvider>
   </StrictMode>
 );

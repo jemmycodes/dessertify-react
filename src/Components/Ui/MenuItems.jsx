@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { IoAddCircle } from "react-icons/io5";
 import { AiFillMinusCircle, AiFillStar } from "react-icons/ai";
 import { LazyImage } from "..";
+import { useCart } from "../../context/CartContext";
 
 // eslint-disable-next-line react/prop-types
-const MenuItems = ({ image, description, price, name }) => {
+const MenuItems = ({ image, description, price, name, id }) => {
+  const { addToCart } = useCart();
+
   const [quantity, setQuantity] = useState(1);
   return (
     <div className="flex flex-col max-w-lg bg-white rounded-md shadow-lg md:gap-3 md:p-3 md:flex-row">
@@ -50,7 +53,14 @@ const MenuItems = ({ image, description, price, name }) => {
             <AiFillStar />
           </span>
         </div>
-        <button className="px-2 py-2 text-sm transition-colors duration-200 border rounded-md border-orange hover:text-white hover:bg-orange text-orange">
+        <button
+          className="px-2 py-2 text-sm transition-colors duration-200 border rounded-md border-orange hover:text-white hover:bg-orange text-orange"
+          type="button"
+          onClick={() => {
+            setQuantity(1);
+            addToCart({ id, name, price, quantity, image });
+          }}
+        >
           Add to cart
         </button>
       </hgroup>

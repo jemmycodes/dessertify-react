@@ -24,19 +24,16 @@ const Navigation = () => {
           <NavLink to="/" className={assignActiveClass}>
             <MdHome />
           </NavLink>
-          {/* <p>Home</p> */}
         </li>
         <li>
-          <NavLink to="/menu/desserts" className={assignActiveClass}>
+          <NavLink to="/menu" className={assignActiveClass}>
             <MdOutlineRestaurantMenu />
           </NavLink>
-          {/* <p>Menu</p> */}
         </li>
         <li>
           <NavLink to="cart" className={assignActiveClass}>
             <MdShoppingCart />
           </NavLink>
-          {/* <p>Cart</p> */}
         </li>
       </ul>
       <div></div>

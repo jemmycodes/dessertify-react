@@ -1,6 +1,6 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Home, Menu } from "./Pages";
+import { Home, Menu, NotFound, Cart } from "./Pages";
 import { MenuLayout, RootLayout } from "./Components";
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     {
       path: "/",
       element: <RootLayout />,
-      errorElement: "error",
+      errorElement: <NotFound />,
       children: [
         {
           children: [
@@ -25,6 +25,10 @@ function App() {
               ],
             },
           ],
+        },
+        {
+          path: "cart",
+          element: <Cart />,
         },
       ],
     },
