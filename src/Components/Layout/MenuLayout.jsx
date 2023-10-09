@@ -1,11 +1,16 @@
 import React from "react";
 import { MenuItems } from "../index.js";
 import { Metronome } from "@uiball/loaders";
-import { useMenu } from "../../context/MenuContext.jsx";
+import { useFetch } from "../../hooks";
+import { useSearchParams, useLocation } from "react-router-dom";
+
+const url = "https://freerandomapi.cyclic.app/api/v1/desserts?limit=100";
 
 const MenuLayout = () => {
-  const { menu, error, loading } = useMenu();
-  console.log(menu);
+  const { data, loading, error } = useFetch(url);
+  const [searchParams] = useSearchParams();
+
+  const searchValue = searchParams.get("search")?.trim();
 
   if (loading)
     return (
@@ -16,19 +21,43 @@ const MenuLayout = () => {
 
   if (error) return <p>Something went wrong!</p>;
 
-  return (
-    <section className="grid justify-between gap-5 py-5 grid-cols-menu-small-screens md:grid-cols-menu-items ">
-      {menu.map((item, index) => (
-        <MenuItems
-          image={item.photoUrl}
-          description={item.description}
-          key={item._id}
-          name={item.name}
-          price={index * 11}
-        />
-      ))}
-    </section>
-  );
+  if (searchValue) {
+    const filteredData = data.filter(
+      (item) =>
+        item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+        item.description.toLowerCase().includes(searchValue.toLowerCase())
+    );
+
+    if (searchValue.length && filteredData.length < 1)
+      return (
+        <p>
+          No result found for{" "}
+          <span className="font-bold text-orange">
+            &apos;{searchValue}&apos;
+          </span>
+        </p>
+      );
+
+    return filteredData.map((item, index) => (
+      <MenuItems
+        key={item._id}
+        price={index * 10}
+        description={item.description}
+        name={item.name}
+        image={item.photoUrl}
+      />
+    ));
+  }
+
+  return data.map((item, index) => (
+    <MenuItems
+      key={item._id}
+      price={index * 10}
+      description={item.description}
+      name={item.name}
+      image={item.photoUrl}
+    />
+  ));
 };
 
 export default MenuLayout;

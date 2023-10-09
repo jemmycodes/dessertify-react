@@ -23,9 +23,8 @@ const MenuProvider = ({ children }) => {
         const { data } = await axios.get(
           "https://freerandomapi.cyclic.app/api/v1/desserts?limit=100"
         );
-        // console.log(presentUrl);
+
         setMenu(data.data);
-        console.log(data.data);
       } catch (error) {
         console.error(error);
         setError(true);

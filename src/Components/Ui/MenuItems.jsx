@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { IoAddCircle } from "react-icons/io5";
-import { BsCartPlusFill } from "react-icons/bs";
 import { AiFillMinusCircle, AiFillStar } from "react-icons/ai";
 import { LazyImage } from "..";
 
@@ -8,7 +7,7 @@ import { LazyImage } from "..";
 const MenuItems = ({ image, description, price, name }) => {
   const [quantity, setQuantity] = useState(1);
   return (
-    <div className="flex flex-col bg-white rounded-md shadow-lg md:gap-3 md:p-3 md:flex-row">
+    <div className="flex flex-col max-w-lg bg-white rounded-md shadow-lg md:gap-3 md:p-3 md:flex-row">
       <LazyImage
         src={image}
         alt={name}
@@ -43,7 +42,7 @@ const MenuItems = ({ image, description, price, name }) => {
           />
         </span>
         <div className="flex items-center gap-2 text-sm">
-          <p>Ratings:</p>
+          <p>Rating:</p>
           <span className="flex gap-1 text-yellow-400">
             <AiFillStar />
             <AiFillStar />

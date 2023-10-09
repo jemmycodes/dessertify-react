@@ -33,7 +33,7 @@ const Home = () => {
                 <img src={donut} alt="donuts" height="25" width="25" />
               </span>
               <p>Donuts</p>
-            </NavLink>{" "}
+            </NavLink>
             <NavLink className="group hover:bg-orange/10 flex flex-col  justify-center gap-4 items-center px-3 py-4 rounded-full bg-white transition-colors duration-500">
               <span className="bg-orange/10 p-2 rounded-full group-hover:bg-white">
                 <img src={cookies} alt="cookies" height="25" width="25" />
