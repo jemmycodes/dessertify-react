@@ -27,7 +27,7 @@ function Menu() {
   return (
     <>
       {pathname === "/menu" && <Navigate to="/menu/desserts" replace={true} />}
-      <main className="min-h-screen ">
+      <main className="min-h-screen p-6 bg-orange/10">
         <header className="flex flex-col gap-4 lg:flex-row lg:justify-between lg:items-center">
           <nav id="menu-navigation" className="overflow-scroll scrollbar-hide ">
             <ul className="flex gap-3">

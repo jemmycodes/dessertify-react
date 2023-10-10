@@ -11,6 +11,23 @@ input[type="number"] {
   margin: 0; /* Optional: Adjust the spacing as needed */
 }
 
+#cart::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+#cart::-webkit-scrollbar-track {
+  /* box-shadow: inset 0 0 5px grey; */
+  
+color:transparent;
+}
+
+/* Handle */
+#cart::-webkit-scrollbar-thumb {
+  background: #ed7c12;
+  border-radius: 5px;
+}
+
 /* vanilla css styles */
 body {
   font-family: "Rubik", sans-serif;
@@ -20,18 +37,18 @@ body {
 /* Tailwind custom classes */
 @layer base {
   nav#home-nav li a {
-    @apply font-bold text-2xl;
+    @apply text-2xl font-bold;
   }
 
   section#hero nav a p {
     @apply text-xs;
   }
   nav#home-nav li {
-    @apply flex flex-col justify-center gap-1 items-center md:hover:text-orange;
+    @apply flex flex-col items-center justify-center gap-1 md:hover:text-orange;
   }
 
   nav#menu-navigation ul a {
-    @apply flex w-fit flex-shrink-0  border px-3 py-2 text-sm hover:scale-110 transition-all duration-500 rounded-full gap-2;
+    @apply flex flex-shrink-0 gap-2 px-3 py-2 text-sm transition-all duration-500 border rounded-full w-fit hover:scale-110;
   }
 
   .rounded-btns {

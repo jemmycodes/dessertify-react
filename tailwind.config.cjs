@@ -14,6 +14,9 @@ module.exports = {
         blackText: "#515151",
         "dark-blue": "#030021",
       },
+      screens: {
+        md: "870px",
+      },
       fontFamily: {
         "frank-ruhl": ["Frank Ruhl Libre", "serif"],
         rubik: ["Rubik", "sans-serif"],
@@ -22,6 +25,7 @@ module.exports = {
         "root-layout": "5rem 1fr",
         "menu-items": "repeat(auto-fit, minmax(20rem, 1fr))",
         "menu-small-screens": "repeat(auto-fit, minmax(12rem, 1fr))",
+        "cart-items": "3fr 1fr 1fr 1fr",
       },
     },
   },

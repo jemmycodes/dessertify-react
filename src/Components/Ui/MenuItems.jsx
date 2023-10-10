@@ -5,7 +5,7 @@ import { LazyImage } from "..";
 import { useCart } from "../../context/CartContext";
 
 // eslint-disable-next-line react/prop-types
-const MenuItems = ({ image, description, price, name, id }) => {
+const MenuItems = ({ image, description, price, name, id, category }) => {
   const { addToCart } = useCart();
 
   const [quantity, setQuantity] = useState(1);
@@ -58,7 +58,7 @@ const MenuItems = ({ image, description, price, name, id }) => {
           type="button"
           onClick={() => {
             setQuantity(1);
-            addToCart({ id, name, price, quantity, image });
+            addToCart({ id, name, category, price, quantity, image });
           }}
         >
           Add to cart

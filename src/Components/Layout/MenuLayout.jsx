@@ -58,6 +58,7 @@ const MenuLayout = () => {
       description={item.description}
       name={item.name}
       image={item.photoUrl}
+      category={item.category}
     />
   ));
 };

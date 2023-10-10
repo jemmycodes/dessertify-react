@@ -7,42 +7,59 @@ const { Provider } = CartContext;
 
 //eslint-disable-next-line
 const CartProvider = ({ children }) => {
+    const itemExists = (id) => cart.findIndex((item) => item?.id === id);
   const [cart, setCart] = useState([]);
 
-  const addToCart = (menu) => {
-    console.log(menu);
-    const item = cart.find((cartItem) => cartItem.id === menu.id);
+  const addToCart = (item) => {
+    // Check if item exists in the cart already
+    const existingFoodIndex = itemExists(item.id);
 
-    item &&
-      toast.error(
-        <p className="text-xs">
-          <span className="font-bold text-orange"> {item.name}</span> already in
-          cart.
-        </p>
-      );
-
-    if (!item) {
-      setCart((prevCart) => [...prevCart, menu]);
-      console.log(menu);
-      toast.success(
-        <p className="text-xs">
-          Added
-          <span className="font-bold text-orange "> {menu.quantity}</span>{" "}
-          {menu.name} to cart
-        </p>
-      );
+    if (existingFoodIndex === -1) {
+      setCart((prevCart) => [item, ...prevCart]);
+      toast.success(`${item.quantity} ${item.name} added to cart!`);
+    } else {
+      const existingFood = cart[existingFoodIndex];
+      const cartData = [...cart];
+      cartData.splice(existingFoodIndex, 1, {
+        ...item,
+        quantity: +item.quantity + +existingFood.quantity,
+      });
+      setCart(cartData);
+      toast.success(`${item.quantity} ${existingFood.name} added to cart!`)
     }
-    console.log(cart);
   };
 
+
   const removeFromCart = (id) => {
-    console.log(id);
+    const existingFoodIndex = itemExists(id);
+
+    if (existingFoodIndex >= 0) {
+      setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+    }
+    
+    toast.success(`${cart[existingFoodIndex].name} removed from cart!`)
+  };
+
+  const reduceFromCart = (id) => {
+    const existingFoodIndex = itemExists(id);
+    if (existingFoodIndex >= 0) {
+      const existingFood = cart[existingFoodIndex];
+      if (existingFood.quantity === 1) return;
+      const cartData = [...cart];
+      cartData.splice(existingFoodIndex, 1, {
+        ...existingFood,
+        quantity: +existingFood.quantity - 1,
+      });
+
+      setCart(cartData);
+      
+    }
   };
 
   return (
     <>
       <Toaster position="top-center" />
-      <Provider value={{ cart, addToCart, removeFromCart }}>
+      <Provider value={{ cart, addToCart, removeFromCart, reduceFromCart }}>
         {children}
       </Provider>
     </>

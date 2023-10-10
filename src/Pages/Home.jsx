@@ -17,7 +17,7 @@ const Home = () => {
   return (
     <section
       id="hero"
-      className="flex items-center justify-center min-h-screen px-8 py-4 md:flex-row"
+      className="flex items-center justify-center min-h-screen bg-orange/10 px-8 py-4 md:flex-row"
     >
       <div className="flex flex-col items-center justify-between w-full max-w-5xl gap-5 mx-auto md:flex-row ">
         <section className="flex flex-col gap-4 ">

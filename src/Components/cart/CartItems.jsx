@@ -1,50 +1,62 @@
-import Image from "../Ui/Image";
-import image from "../../assets/donut.png";
-import { AiFillDelete } from "react-icons/ai";
-import { useDispatch } from "react-redux";
-import { addToCart, removeFromCart } from "../../store/slices/cartSlice";
+import React from "react";
+import { LazyImage } from "..";
+import { useCart } from "../../context/CartContext";
 
-function CartItems(props) {
-  const dispatch = useDispatch();
-
-  const removeFromCartHandler = () => {
-    dispatch(removeFromCart({ id: props.id, quantity: 1, price: props.price }));
-  };
-  const addToCartHandler = () => {
-    dispatch(addToCart({ id: props.id, quantity: 1, price: props.price }));
-  };
-
+// eslint-disable-next-line
+const CartItems = ({ image, name, category, id, quantity, price }) => {
+  console.log(quantity)
+  const { removeFromCart, addToCart, reduceFromCart } = useCart();
   return (
-    <hgroup className="bg-[#303030] text-white rounded-md p-2 gap-2 flex items-center">
-      <Image
-        src={props.image}
-        alt={props.name}
-        className="w-[6rem] h-[3.5rem] object-cover rounded-full "
-      />
-      <div>
-        <p className=" max-w-[8rem]  text-md">{props.name}</p>
-        <p>
-          <span className="text-pepperRed mr-1 font-bold">₦</span>
-          {props.price}
-        </p>
-      </div>
-      <div className="flex gap-3 items-center">
-        <p onClick={removeFromCartHandler} className="cursor-pointer">
-          -
-        </p>
-        <p className="px-2  bg-[#1c1c1c] rounded-md">{props.amount}</p>
-        <p onClick={addToCartHandler} className="cursor-pointer">
-          +
-        </p>
-      </div>
-      <div className="bg-pepperRed text-white p-1 rounded-md mx-2">
-        <AiFillDelete
-          className="cursor-pointer"
-          onClick={removeFromCartHandler}
+    <div className="flex justify-between gap-6 md:grid place-content-end grid-cols-cart-items">
+      <figure className="flex gap-3 overflow-hidden ">
+        <LazyImage
+          src={image}
+          alt={name}
+          height="100"
+          width="100"
+          className="w-20 h-full object-cover md:w-1/2 md:max-w-[100px]  md:aspect-square"
         />
-      </div>
-    </hgroup>
+        <figcaption className="flex-col justify-between hidden w-full gap-2 md:flex">
+          <p className="text-sm">{name}</p>
+          <p className="text-xs font-bold text-orange">{category}</p>
+          <p
+            className="text-sm text-gray-600 cursor-pointer"
+            onClick={() => removeFromCart(id)}
+          >
+            Remove
+          </p>
+        </figcaption>
+      </figure>
+      <figcaption className="flex flex-col justify-between gap-2 md:hidden">
+        <p className="text-sm">{name}</p>
+        <p className="text-xs font-bold text-orange">{category}</p>
+        <p
+          className="text-sm text-gray-600 cursor-pointer"
+          onClick={() => removeFromCart(id)}
+        >
+          Remove
+        </p>
+      </figcaption>
+      <span className="flex flex-col items-center self-start gap-2 text-lg md:flex-row">
+        <button
+         
+        >
+          -
+        </button>
+        <p
+          type="text"
+          className="w-12 p-1 text-xs text-center border rounded-md "
+        >
+          {quantity}
+        </p>
+        <button>+</button>
+      </span>
+      <p className="text-sm font-bold text-right md:font-normal">${price}</p>
+      <p className="hidden text-sm text-right md:inline-block">
+        ${price * quantity}
+      </p>
+    </div>
   );
-}
+};
 
 export default CartItems;
