@@ -10,7 +10,7 @@ const MenuItems = ({ image, description, price, name, id, category }) => {
 
   const [quantity, setQuantity] = useState(1);
   return (
-    <div className="flex flex-col max-w-lg bg-white rounded-md shadow-lg md:gap-3 md:p-3 md:flex-row">
+    <div className="flex flex-col max-w-lg bg-white rounded-md shadow-lg md:gap-7 md:p-4 md:flex-row">
       <LazyImage
         src={image}
         alt={name}
@@ -18,9 +18,9 @@ const MenuItems = ({ image, description, price, name, id, category }) => {
         width="300"
         className="object-cover w-full h-40 md:w-32 rounded-t-md md:h-full md:rounded-md "
       />
-      <hgroup className="flex flex-col w-full gap-2 p-3 md:p-0">
+      <hgroup className="flex flex-col w-full gap-2 p-6 md:p-0">
         <p className="font-bold ">{name}</p>
-        <p className="text-xs text-gray-500 line-clamp-3">{description}</p>
+        <p className="text-sm text-gray-500 line-clamp-3">{description}</p>
 
         <span className="text-sm">
           <strong className="text-orange">${price}</strong> X<i>{quantity}</i>
@@ -74,4 +74,6 @@ const MenuItems = ({ image, description, price, name, id, category }) => {
   );
 };
 
-export default MenuItems;
+const MemoizedMenuItems = React.memo(MenuItems)
+
+export default MemoizedMenuItems;

@@ -54,7 +54,7 @@ function Menu() {
             <input
               type="text"
               id="search"
-              className="w-full px-6 py-3 pl-12 text-xs rounded-lg focus:outline-none focus:shadow-lg"
+              className="w-full px-6 py-3 pl-12 text-sm rounded-lg focus:outline-none focus:shadow-lg"
               placeholder="Search"
               autoComplete="on"
               value={searchParams.get("search") || ""}
