@@ -32,7 +32,12 @@ const CartItems = ({ image, name, category, id, quantity, price }) => {
       <figcaption className="flex flex-col justify-between gap-2 md:hidden">
         <p className="text-sm">{name}</p>
         <p className="text-xs font-bold text-orange">{category}</p>
-        <p className="text-sm text-gray-600 cursor-pointer">Remove</p>
+        <button
+          className="text-sm text-gray-600  px-0 text-left cursor-pointer"
+          onClick={() => removeFromCart(id)}
+        >
+          Remove
+        </button>
       </figcaption>
       <span className="flex flex-col items-center self-start gap-2 text-lg md:flex-row">
         <button

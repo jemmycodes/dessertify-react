@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CartItems, LazyImage } from "../Components";
 import { BiArrowBack } from "react-icons/bi";
@@ -7,11 +7,13 @@ import { emptyCart } from "../assets";
 import useCartStore from "../store/CartStore";
 
 const Cart = () => {
-  const cartItems = useCartStore((state)=>state.cartItems)
+  console.log('cart component is rerendered')
+  const cartItems = useCartStore(state => state.cartItems);
+  const totalAmount = useCartStore(state=>state.totalAmount)
 
   if (!cartItems.length)
     return (
-      <figure className="flex flex-col items-center justify-center w-full h-screen gap-2">
+      <figure className="flex flex-col items-center justify-center w-full h-screen gap-2 p-4">
         <LazyImage
           src={emptyCart}
           alt="empty cart"
@@ -55,7 +57,7 @@ const Cart = () => {
                 id={item.id}
                 image={item.image}
                 category={item.category.replace("_", " ")}
-                price={200}
+                price={item.price}
                 name={item.name}
                 quantity={item.quantity}
               />
@@ -69,8 +71,8 @@ const Cart = () => {
         </h2>
         <div className="flex flex-col max-w-xs gap-4 py-4 mx-auto">
           <span className="flex justify-between">
-            <p className="text-sm font-bold">ITEMS 3</p>
-            <p className="font-bold">$457.98</p>
+            <p className="text-sm font-bold">ITEMS {cartItems.length}</p>
+            <p className="font-bold">${totalAmount}</p>
           </span>
           <div className="flex flex-col gap-4">
             <label className="text-sm font-bold">SHIPPING</label>
@@ -91,7 +93,7 @@ const Cart = () => {
           <div className="flex flex-col gap-8 mt-5">
             <span className="flex justify-between gap-4 font-bold">
               <p>TOTAL COST</p>
-              <p>$462.00</p>
+              <p>$ {totalAmount + 20}</p>
             </span>
             <button
               type="button"
