@@ -4,41 +4,41 @@ import { Home, Menu, NotFound, Cart } from "./Pages";
 import { MenuLayout, RootLayout } from "./Components";
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <RootLayout />,
-      errorElement: <NotFound />,
-      children: [
+    const router = createBrowserRouter([
         {
-          children: [
-            { index: true, element: <Home /> },
-            {
-              path: "/menu",
-              element: <Menu />,
-
-              children: [
+            path: "/",
+            element: <RootLayout />,
+            errorElement: <NotFound />,
+            children: [
                 {
-                  path: ":menutype",
-                  element: <MenuLayout />,
-                },
-              ],
-            },
-          ],
-        },
-        {
-          path: "cart",
-          element: <Cart />,
-        },
-      ],
-    },
-  ]);
+                    children: [
+                        { index: true, element: <Home /> },
+                        {
+                            path: "/menu",
+                            element: <Menu />,
 
-  return (
-    <>
-      <RouterProvider router={router} />
-    </>
-  );
+                            children: [
+                                {
+                                    path: ":menutype",
+                                    element: <MenuLayout />,
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    path: "cart",
+                    element: <Cart />,
+                },
+            ],
+        },
+    ]);
+
+    return (
+        <>
+            <RouterProvider router={router} />
+        </>
+    );
 }
 
 export default App;

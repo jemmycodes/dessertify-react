@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { IoAddCircle } from "react-icons/io5";
 import { AiFillMinusCircle, AiFillStar } from "react-icons/ai";
 import { LazyImage } from "..";
-import { useCart } from "../../context/CartContext";
+import useCartStore from "../../store/CartStore";
 
 // eslint-disable-next-line react/prop-types
 const MenuItems = ({ image, description, price, name, id, category }) => {
-  const { addToCart } = useCart();
+  const addToCart = useCartStore(state => state.addToCart);
 
   const [quantity, setQuantity] = useState(1);
   return (
@@ -29,7 +29,7 @@ const MenuItems = ({ image, description, price, name, id, category }) => {
           <AiFillMinusCircle
             className="text-2xl text-orange "
             onClick={() =>
-              quantity > 1 && setQuantity((prevQuantity) => prevQuantity - 1)
+              quantity > 1 && setQuantity(prevQuantity => prevQuantity - 1)
             }
           />
           <input
@@ -37,11 +37,11 @@ const MenuItems = ({ image, description, price, name, id, category }) => {
             className="w-10 text-center border rounded-md focus:outline-none focus:border-orange"
             value={quantity}
             min={1}
-            onChange={(e) => setQuantity(e.target.value)}
+            onChange={e => setQuantity(e.target.value)}
           />
           <IoAddCircle
             className="text-2xl cursor-pointer text-orange"
-            onClick={() => setQuantity((prevQuantity) => +prevQuantity + 1)}
+            onClick={() => setQuantity(prevQuantity => +prevQuantity + 1)}
           />
         </span>
         <div className="flex items-center gap-2 text-sm">
@@ -57,8 +57,14 @@ const MenuItems = ({ image, description, price, name, id, category }) => {
           className="px-2 py-2 text-sm transition-colors duration-200 border rounded-md border-orange hover:text-white hover:bg-orange text-orange"
           type="button"
           onClick={() => {
-            setQuantity(1);
-            addToCart({ id, name, category, price, quantity, image });
+            addToCart({
+              name,
+              quantity: +quantity,
+              price,
+              category,
+              image,
+              id,
+            });
           }}
         >
           Add to cart

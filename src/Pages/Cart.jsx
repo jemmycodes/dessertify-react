@@ -2,35 +2,33 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { CartItems, LazyImage } from "../Components";
 import { BiArrowBack } from "react-icons/bi";
-import { useCart } from "../context/CartContext";
 import CartLayout from "../Components/Layout/CartLayout";
 import { emptyCart } from "../assets";
-
-
+import useCartStore from "../store/CartStore";
 
 const Cart = () => {
-  const { cart } = useCart();
- 
+  const cartItems = useCartStore((state)=>state.cartItems)
 
-  if (!cart.length) return (
-    <figure className="flex flex-col items-center justify-center w-full h-screen gap-2">
-      <LazyImage
-        src={emptyCart}
-        alt="empty cart"
-        height="300"
-        width="300"
-        className="w-full max-w-sm mx-auto"
-      />
-      <p className="text-lg font-semibold">Your cart is empty!</p>
-      <Link
-        to="/menu"
-        className="flex items-center gap-2 px-3 py-2 text-sm border whitespace-nowrap"
-      >
-        <BiArrowBack />
-        Continue Shopping
-      </Link>
-    </figure>
-  );
+  if (!cartItems.length)
+    return (
+      <figure className="flex flex-col items-center justify-center w-full h-screen gap-2">
+        <LazyImage
+          src={emptyCart}
+          alt="empty cart"
+          height="300"
+          width="300"
+          className="w-full max-w-sm mx-auto"
+        />
+        <p className="text-lg font-semibold">Your cart is empty!</p>
+        <Link
+          to="/menu"
+          className="flex items-center gap-2 px-3 py-2 text-sm border whitespace-nowrap"
+        >
+          <BiArrowBack />
+          Continue Shopping
+        </Link>
+      </figure>
+    );
 
   return (
     <CartLayout>
@@ -38,7 +36,10 @@ const Cart = () => {
         <div className="flex flex-col w-full max-w-2xl gap-4 p-4 mx-auto md:py-16 md:px-10">
           <header className="flex items-center justify-between w-full pb-4 border-b ">
             <h1 className="text-xl font-bold md:text-2xl">Shopping Cart</h1>
-            <Link to="/menu" className="flex items-center gap-2 px-3 py-2 text-sm border whitespace-nowrap">
+            <Link
+              to="/menu"
+              className="flex items-center gap-2 px-3 py-2 text-sm border whitespace-nowrap"
+            >
               <BiArrowBack />
               Back to Menu
             </Link>
@@ -48,7 +49,7 @@ const Cart = () => {
             className="flex flex-col flex-grow gap-5 overflow-y-scroll h-[20rem] md:h-[30rem] pr-4"
             id="cart"
           >
-            {cart.map((item) => (
+            {cartItems.map(item => (
               <CartItems
                 key={item.id}
                 id={item.id}
@@ -56,7 +57,7 @@ const Cart = () => {
                 category={item.category.replace("_", " ")}
                 price={200}
                 name={item.name}
-                quantity={1}
+                quantity={item.quantity}
               />
             ))}
           </div>

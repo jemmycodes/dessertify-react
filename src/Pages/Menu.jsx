@@ -17,8 +17,9 @@ const navData = [
 ];
 
 function Menu() {
-  const [searchParams, setSearchParams] = useSearchParams();
   const { pathname } = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+ 
 
   // active route function
   const assignActiveClass = ({ isActive }) =>
@@ -31,7 +32,7 @@ function Menu() {
         <header className="flex flex-col gap-4 lg:flex-row lg:justify-between lg:items-center">
           <nav id="menu-navigation" className="overflow-scroll scrollbar-hide ">
             <ul className="flex gap-3">
-              {navData.map((item) => (
+              {navData.map(item => (
                 <NavLink
                   className={assignActiveClass}
                   key={item.name}
@@ -57,7 +58,7 @@ function Menu() {
               placeholder="Search"
               autoComplete="on"
               value={searchParams.get("search") || ""}
-              onChange={(e) => setSearchParams({ search: e.target.value })}
+              onChange={e => setSearchParams({ search: e.target.value })}
               required
             />
             <MdOutlineSearch className="absolute left-0 mt-4 ml-4 text-xl font-bold -top-1 text-orange" />
