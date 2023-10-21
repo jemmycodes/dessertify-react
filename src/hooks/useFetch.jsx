@@ -1,30 +1,38 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams, useLocation } from "react-router-dom";
 
-const useFetch = (url) => {
-    const [data, setData] = useState([]);
-    const [error, setError] = useState(false);
-    const [loading, setLoading] = useState(false);
+const useFetch = () => {
+  const { menutype } = useParams();
+  const { pathname } = useLocation();
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        setLoading(true);
+  const url =
+    pathname === "/menu/desserts"
+      ? "https://freerandomapi.cyclic.app/api/v1/desserts?limit=120"
+      : `https://freerandomapi.cyclic.app/api/v1/desserts?category=${menutype}`;
 
-        const fetchMenu = async () => {
-            try {
-                const { data } = await axios.get(url);
+  useEffect(() => {
+    setLoading(true);
 
-                setData(data.data);
-            } catch (error) {
-                console.error(error);
-                setError(true);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchMenu();
-    }, [url]);
+    const fetchMenu = async () => {
+      try {
+        const { data } = await axios.get(url);
+        setData(data.data);
+      } catch (error) {
+        console.error(error);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    return { data, error, loading };
+    fetchMenu();
+  }, [url]);
+
+  return { data, error, loading };
 };
 
-export default useFetch;
+export { useFetch };

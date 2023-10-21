@@ -24,6 +24,13 @@ function App() {
                                 },
                             ],
                         },
+                        
+                        {
+                            path: "login",
+                            element: <div>Auth page</div>
+                        }, {
+                            path:"register",element: <div>Register</div>
+                        }
                     ],
                 },
                 {
