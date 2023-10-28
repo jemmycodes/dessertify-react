@@ -4,3 +4,4 @@ export { default as CartItems } from "./cart/CartItems";
 export { default as MenuLayout } from "./Layout/MenuLayout";
 export { default as RootLayout } from "./Layout/RootLayout";
 export {default as AuthLayout} from "./Layout/AuthLayout";
+export {default as Input } from "./Ui/Input"

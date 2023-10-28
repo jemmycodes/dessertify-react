@@ -7,7 +7,6 @@ import { emptyCart } from "../assets";
 import useCartStore from "../store/CartStore";
 
 const Cart = () => {
-  console.log('cart component is rerendered')
   const cartItems = useCartStore(state => state.cartItems);
   const totalAmount = useCartStore(state=>state.totalAmount)
 

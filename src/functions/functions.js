@@ -7,3 +7,5 @@ export const filterArray = (array, searchInput) =>
         item.name.toLowerCase().includes(searchInput.toLowerCase())
       )
     : array;
+
+    
