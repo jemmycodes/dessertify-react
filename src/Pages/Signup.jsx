@@ -3,47 +3,42 @@ import google from "../assets/google.webp";
 import Logo from "../Components/Navigation/Logo";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { AuthLayout, Input } from "../Components";
+import { AuthLayout, Input, Modal } from "../Components";
 import { yupResolver } from "@hookform/resolvers/yup";
-
-const schema = yup
-  .object({
-    firstname: yup.string().trim().required("First Name is required"),
-    lastname: yup.string().trim().required("Last name is required"),
-    email: yup
-      .string()
-      .trim()
-      .email("Email address is not valid")
-      .required("Email cannot be empty"),
-    houseAddress: yup.string().trim().required("House Address cannot be empty"),
-    password: yup
-      .string()
-      .trim()
-      .min(8, "Password is too short")
-      .required("Please enter a password"),
-    confirmPassword: yup
-      .string()
-      .trim()
-      .oneOf([yup.ref("password")], "Your passwords do not match")
-      .required("Field cannot be empty"),
-  })
-  .required();
+import { signUpWithEmail, signupSchema } from "../functions/functions";
+import { createPortal } from "react-dom";
+import { useState } from "react";
 
 const Signup = () => {
+  const [showModal, setShowModal] = useState(true);
+  let mail;
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(signupSchema),
   });
 
-  const onSubmit = data => {
-    console.log(data);
+  const onSubmit = async fields => {
+    console.log(fields);
+    const { firstname, lastname, houseAddress, email, password } = fields;
+    mail = email;
+    const response = await signUpWithEmail(
+      { firstname, lastname, houseAddress },
+      { email, password }
+    );
+    console.log(response);
   };
 
   return (
     <AuthLayout>
+      {showModal &&
+        createPortal(
+          <Modal handleModal={() => setShowModal(false)} mail="test@test.com" />,
+          document.querySelector("#root")
+        )}
       <Logo className="flex self-center md:hidden" />
 
       <h1 className="text-2xl font-bold font-frank-ruhl">Welcome!</h1>
