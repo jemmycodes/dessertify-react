@@ -2,7 +2,7 @@ import React from "react";
 import { MenuItems } from "../index.js";
 import { Metronome } from "@uiball/loaders";
 import {useFetch} from "../../hooks/useFetch"
-import { filterArray } from "../../functions/functions.js";
+import { filterArray } from "../../utils/utils.js";
 import { useSearchParams} from "react-router-dom";
 
 const MenuLayout = () => {

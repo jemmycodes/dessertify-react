@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import toast from "react-hot-toast";
-import { checkIfItemExists } from "../functions/functions";
+import { checkIfItemExists } from "../utils/utils";
 
 const useCartStore = create(set => ({
   cartItems: [],

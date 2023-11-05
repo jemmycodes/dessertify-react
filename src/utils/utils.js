@@ -1,5 +1,5 @@
 import { supabase } from "../../supabaseClient";
-import * as yup from "yup"
+import * as yup from "yup";
 
 export const checkIfItemExists = (id, array) =>
   array.findIndex(item => item.id === id);
@@ -11,13 +11,18 @@ export const filterArray = (array, searchInput) =>
       )
     : array;
 
-export const signUpWithEmail = async (metadata, { email, password }) => {
+export const signUpWithEmail = async fields => {
   const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: { data: metadata },
+    email: fields.email,
+    password: fields.password,
+    options: {
+      data: {
+        firstname: fields.firstname,
+        lastname: fields.lastname,
+        houseAddress: fields.houseAddress,
+      },
+    },
   });
-
   return { data, error };
 };
 
