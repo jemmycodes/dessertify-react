@@ -1,14 +1,31 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { CartItems, LazyImage } from "../Components";
-import { BiArrowBack } from "react-icons/bi";
-import CartLayout from "../Components/Layout/CartLayout";
 import { emptyCart } from "../assets";
+import React, { useEffect } from "react";
+import { BiArrowBack } from "react-icons/bi";
 import useCartStore from "../store/CartStore";
+import { getUserSession } from "../utils/utils";
+import { CartItems, LazyImage } from "../Components";
+import { Link, useNavigate } from "react-router-dom";
+import CartLayout from "../Components/Layout/CartLayout";
+import toast from "react-hot-toast";
 
 const Cart = () => {
+  const navigate = useNavigate();
   const cartItems = useCartStore(state => state.cartItems);
-  const totalAmount = useCartStore(state=>state.totalAmount)
+  const totalAmount = useCartStore(state => state.totalAmount);
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      console.log("checking authentication")
+      const response = await getUserSession();
+
+      if (!response) {
+        toast.error("Please login to access cart!");
+        navigate("/login");
+      }
+    };
+
+    checkAuthentication();
+  });
 
   if (!cartItems.length)
     return (

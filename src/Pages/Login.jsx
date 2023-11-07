@@ -1,35 +1,36 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import google from "../assets/google.webp";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Logo from "../Components/Navigation/Logo";
 import { AuthLayout, Input } from "../Components";
-
-const schema = yup
-  .object({
-    email: yup
-      .string()
-      .email("Please enter a valid email address")
-      .required("Email cannot be empty"),
-    password: yup
-      .string()
-      .required("Password is required")
-      .min(8, "Password must be at least 8 characters"),
-  })
-  .required();
+import { useState } from "react";
+import { signInWithEmail, loginSchema } from "../utils/utils";
+import toast from "react-hot-toast";
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm({ resolver: yupResolver(loginSchema) });
 
-  const onsubmit = data => {
-    console.log(data);
-    reset();
+  const onsubmit = async fields => {
+    setLoading(true);
+    const toastID = toast.loading("Signing you in ...");
+
+    const response = await signInWithEmail(fields, toastID);
+
+    console.log(response);
+
+    response?.session && navigate("/menu");
+
+    setLoading(false);
   };
 
   return (
@@ -71,10 +72,11 @@ const Login = () => {
         </button>
 
         <button
-          className="px-10 py-3 text-sm w-full rounded-full text-white bg-orange "
-         
+          disabled={loading}
+          type="submit"
+          className="px-10 py-3 text-sm w-full rounded-full text-white bg-orange disabled:bg-gray-400 disabled:text-white"
         >
-          Sign in
+          {loading ? "Loading..." : "Sign in"}
         </button>
       </form>
 

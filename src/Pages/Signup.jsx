@@ -1,20 +1,20 @@
-import google from "../assets/google.webp";
-import Logo from "../Components/Navigation/Logo";
-import { Link } from "react-router-dom";
-import { set, useForm } from "react-hook-form";
-import { AuthLayout, Input, Modal } from "../Components";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { signUpWithEmail, signupSchema } from "../utils/utils";
-import { createPortal } from "react-dom";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
+import { createPortal } from "react-dom";
+import { useForm } from "react-hook-form";
+import google from "../assets/google.webp";
+import Logo from "../Components/Navigation/Logo";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { AuthLayout, Input, Modal } from "../Components";
 import useTogglePassword from "../hooks/useTogglePassword";
+import { signUpWithEmail, signupSchema } from "../utils/utils";
 
 const Signup = () => {
   const [showModal, setShowModal] = useState(true);
-  const [loading, setLoading] = useState(false)
-const password = useTogglePassword()
-const confirmPassword = useTogglePassword();
+  const [loading, setLoading] = useState(false);
+  const password = useTogglePassword();
+  const confirmPassword = useTogglePassword();
 
   const {
     register,
@@ -25,33 +25,13 @@ const confirmPassword = useTogglePassword();
   });
 
   const onSubmit = async fields => {
-    console.log("creating account...");
+    setLoading(true);
+    const toastID = toast.loading("Creating Account");
+   
+    const response = await signUpWithEmail(fields, toastID);
 
-    try {
-      setLoading(true)
-      toast.loading('Creating account...')
-      const { data, error } = await signUpWithEmail(fields);
-
-      if (error?.status === 0) {
-        toast.error("Network Error, please check your connection!");
-        throw new Error(error.message);
-      }
-      
-      // data.session ?? setShowModal(true )
-
-      if (!data?.session) {
-        setShowModal(true);
-        console.log('hi')
-      }
-
-      console.log(data, error);
-    } catch (error) {
-      console.log(error);
-    }
-    finally {
-      setLoading(false)
-      toast.dismiss()
-    }
+    console.log(response);
+    setLoading(false);
   };
 
   return (
@@ -125,7 +105,7 @@ const confirmPassword = useTogglePassword();
         <p className="-mt-6 text-xs text-right underline text-orange">
           Forgot Password?
         </p>
-        <button  className=" px-5 w-full py-3 border flex justify-center items-center rounded-full font-medium text-sm relative ">
+        <button className=" px-5 w-full py-3 border flex justify-center items-center rounded-full font-medium text-sm relative ">
           <img
             src={google}
             alt=""
@@ -136,11 +116,11 @@ const confirmPassword = useTogglePassword();
           Continue with Google
         </button>
         <button
-        disabled={loading}
+          disabled={loading}
           type="submit"
           className="px-10 py-3 text-sm w-full rounded-full text-white bg-orange disabled:bg-gray-400 disabled:text-white"
         >
-          {loading ? 'Loading...' : 'Signup'}
+          {loading ? "Loading..." : "Signup"}
         </button>
       </form>
 

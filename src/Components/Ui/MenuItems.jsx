@@ -1,11 +1,15 @@
+import { LazyImage } from "..";
+import toast from "react-hot-toast";
 import React, { useState } from "react";
 import { IoAddCircle } from "react-icons/io5";
-import { AiFillMinusCircle, AiFillStar } from "react-icons/ai";
-import { LazyImage } from "..";
 import useCartStore from "../../store/CartStore";
+import { getUserSession } from "../../utils/utils";
+import { AiFillMinusCircle, AiFillStar } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 const MenuItems = ({ image, description, price, name, id, category }) => {
+  const navigate = useNavigate();
   const addToCart = useCartStore(state => state.addToCart);
 
   const [quantity, setQuantity] = useState(1);
@@ -56,15 +60,23 @@ const MenuItems = ({ image, description, price, name, id, category }) => {
         <button
           className="px-2 py-2 text-sm transition-colors duration-200 border rounded-md border-orange hover:text-white hover:bg-orange text-orange"
           type="button"
-          onClick={() => {
-            addToCart({
-              name,
-              quantity: +quantity,
-              price,
-              category,
-              image,
-              id,
-            });
+          onClick={async () => {
+            const response = await getUserSession();
+
+            if (!response) {
+              toast.error("Login to Add to Cart");
+              navigate("/login")
+            }
+
+            response &&
+              addToCart({
+                name,
+                quantity: +quantity,
+                price,
+                category,
+                image,
+                id,
+              });
           }}
         >
           Add to cart
@@ -74,6 +86,6 @@ const MenuItems = ({ image, description, price, name, id, category }) => {
   );
 };
 
-const MemoizedMenuItems = React.memo(MenuItems)
+const MemoizedMenuItems = React.memo(MenuItems);
 
 export default MemoizedMenuItems;

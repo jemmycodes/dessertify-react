@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { supabase } from "../../supabaseClient";
 import * as yup from "yup";
 
@@ -11,7 +12,7 @@ export const filterArray = (array, searchInput) =>
       )
     : array;
 
-export const signUpWithEmail = async fields => {
+export const signUpWithEmail = async (fields, toastID) => {
   const { data, error } = await supabase.auth.signUp({
     email: fields.email,
     password: fields.password,
@@ -23,7 +24,46 @@ export const signUpWithEmail = async fields => {
       },
     },
   });
-  return { data, error };
+
+  if (error?.status === 0) {
+    toast.error("Please check your internet connection!", { id: toastID });
+    return;
+  }
+
+  if (error) {
+    toast.error("Something went wrong, please try again!", { id: toastID });
+    return;
+  }
+
+  toast.dismiss(toastID);
+  return data;
+};
+
+export const signInWithEmail = async (fields, toastID) => {
+  const { data, error } = await supabase.auth.signInWithPassword(fields);
+
+  if (error?.status === 400) {
+    toast.error("Email or Password is incorrect!", { id: toastID });
+    return;
+  }
+
+  if (error) {
+    toast.error("Something went wrong, please try again!", { id: toastID });
+  }
+
+  toast.dismiss(toastID);
+  return data;
+};
+
+export const getUserSession = async () => {
+  const { data, error } = await supabase.auth.getSession();
+
+  if (error) {
+    toast.error("Something went wrong, please try again!");
+    return;
+  }
+
+  return data.session;
 };
 
 export const signupSchema = yup
@@ -46,5 +86,18 @@ export const signupSchema = yup
       .trim()
       .oneOf([yup.ref("password")], "Your passwords do not match")
       .required("Field cannot be empty"),
+  })
+  .required();
+
+export const loginSchema = yup
+  .object({
+    email: yup
+      .string()
+      .email("Please enter a valid email address")
+      .required("Email cannot be empty"),
+    password: yup
+      .string()
+      .required("Password is required")
+      .min(8, "Password must be at least 8 characters"),
   })
   .required();
