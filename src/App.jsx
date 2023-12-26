@@ -24,15 +24,6 @@ function App() {
                 },
               ],
             },
-
-            {
-              path: "login",
-              element: <Login />,
-            },
-            {
-              path: "Signup",
-              element: <Signup />,
-            },
           ],
         },
         {
@@ -40,6 +31,14 @@ function App() {
           element: <Cart />,
         },
       ],
+    },
+    {
+      path: "login",
+      element: <Login />,
+    },
+    {
+      path: "Signup",
+      element: <Signup />,
     },
   ]);
 

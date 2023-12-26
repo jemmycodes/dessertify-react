@@ -1,53 +1,62 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { createPortal } from "react-dom";
 import { useForm } from "react-hook-form";
 import google from "../assets/google.webp";
-import Logo from "../Components/Navigation/Logo";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AuthLayout, Input, Modal } from "../Components";
 import useTogglePassword from "../hooks/useTogglePassword";
-import { signUpWithEmail, signupSchema } from "../utils/utils";
+import { signUpWithEmail } from "../utils/supabase";
+import { signupSchema } from "../utils/utils";
 
 const Signup = () => {
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const password = useTogglePassword();
   const confirmPassword = useTogglePassword();
 
   const {
     register,
+    getValues,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(signupSchema),
   });
 
-  const onSubmit = async fields => {
+  const onSubmit = async (fields) => {
     setLoading(true);
     const toastID = toast.loading("Creating Account");
-   
-    const response = await signUpWithEmail(fields, toastID);
 
-    console.log(response);
+    const { data, error } = await signUpWithEmail(fields, toastID);
+
     setLoading(false);
+
+    console.log(data, error);
+
+    if (!data?.session) {
+      reset({
+        email: "",
+        firstname: "",
+        lastname: "",
+        houseAddress: "",
+        password: "",
+        confirmPassword: "",
+      });
+      setShowModal(true);
+    }
+
+    console.log(showModal);
   };
 
   return (
-    <AuthLayout>
-      {showModal &&
-        createPortal(
-          <Modal
-            handleModal={() => setShowModal(false)}
-            mail="test@test.com"
-          />,
-          document.querySelector("#root")
-        )}
-      <Logo className="flex self-center md:hidden" />
-
-      <h1 className="text-2xl font-bold font-frank-ruhl">Welcome!</h1>
-      <h4 className="text-sm ">Create an account</h4>
+    <AuthLayout heading="Welcome!" subheading="Create an account">
+      <Modal
+        mail={getValues("email")}
+        showModal={showModal}
+        handleModal={() => setShowModal(false)}
+      />
 
       <form className="my-8 space-y-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex gap-2">
@@ -105,7 +114,7 @@ const Signup = () => {
         <p className="-mt-6 text-xs text-right underline text-orange">
           Forgot Password?
         </p>
-        <button className=" px-5 w-full py-3 border flex justify-center items-center rounded-full font-medium text-sm relative ">
+        <button className="relative flex items-center justify-center w-full px-5 py-3 text-sm font-medium border rounded-full ">
           <img
             src={google}
             alt=""
@@ -118,8 +127,7 @@ const Signup = () => {
         <button
           disabled={loading}
           type="submit"
-          className="px-10 py-3 text-sm w-full rounded-full text-white bg-orange disabled:bg-gray-400 disabled:text-white"
-        >
+          className="w-full px-10 py-3 text-sm text-white rounded-full bg-orange disabled:bg-gray-400 disabled:text-white">
           {loading ? "Loading..." : "Signup"}
         </button>
       </form>

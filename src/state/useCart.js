@@ -2,7 +2,7 @@ import { create } from "zustand";
 import toast from "react-hot-toast";
 import { checkIfItemExists } from "../utils/utils";
 
-const useCartStore = create(set => ({
+const useCart = create(set => ({
   cartItems: [],
   totalAmount: 0,
   addToCart: item =>
@@ -68,4 +68,4 @@ const useCartStore = create(set => ({
     }),
 }));
 
-export default useCartStore;
+export default useCart;

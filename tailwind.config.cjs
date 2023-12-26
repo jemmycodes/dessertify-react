@@ -3,6 +3,9 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     extend: {
+      backgroundImage: {
+        "auth-page": "url('src/assets/auth-bg.jpg')",
+      },
       colors: {
         orange: "#ed7c12",
         "dark-brown": "#211200",

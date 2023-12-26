@@ -1,31 +1,18 @@
 import { emptyCart } from "../assets";
-import React, { useEffect } from "react";
+import React from "react";
 import { BiArrowBack } from "react-icons/bi";
-import useCartStore from "../store/CartStore";
-import { getUserSession } from "../utils/utils";
+import useCart from "../state/useCart.js";
 import { CartItems, LazyImage } from "../Components";
 import { Link, useNavigate } from "react-router-dom";
 import CartLayout from "../Components/Layout/CartLayout";
-import toast from "react-hot-toast";
 
 const Cart = () => {
   const navigate = useNavigate();
-  const cartItems = useCartStore(state => state.cartItems);
-  const totalAmount = useCartStore(state => state.totalAmount);
 
-  useEffect(() => {
-    const checkAuthentication = async () => {
-      console.log("checking authentication")
-      const response = await getUserSession();
-
-      if (!response) {
-        toast.error("Please login to access cart!");
-        navigate("/login");
-      }
-    };
-
-    checkAuthentication();
-  });
+  const { cartItems, totalAmount } = useCart((state) => ({
+    cartItems: state.cartItems,
+    totalAmount: state.totalAmount,
+  }));
 
   if (!cartItems.length)
     return (
@@ -40,8 +27,7 @@ const Cart = () => {
         <p className="text-lg font-semibold">Your cart is empty!</p>
         <Link
           to="/menu"
-          className="flex items-center gap-2 px-3 py-2 text-sm border whitespace-nowrap"
-        >
+          className="flex items-center gap-2 px-3 py-2 text-sm border whitespace-nowrap">
           <BiArrowBack />
           Continue Shopping
         </Link>
@@ -56,8 +42,7 @@ const Cart = () => {
             <h1 className="text-xl font-bold md:text-2xl">Shopping Cart</h1>
             <Link
               to="/menu"
-              className="flex items-center gap-2 px-3 py-2 text-sm border whitespace-nowrap"
-            >
+              className="flex items-center gap-2 px-3 py-2 text-sm border whitespace-nowrap">
               <BiArrowBack />
               Back to Menu
             </Link>
@@ -65,9 +50,8 @@ const Cart = () => {
 
           <div
             className="flex flex-col flex-grow gap-5 overflow-y-scroll h-[20rem] md:h-[30rem] pr-4"
-            id="cart"
-          >
-            {cartItems.map(item => (
+            id="cart">
+            {cartItems.map((item) => (
               <CartItems
                 key={item.id}
                 id={item.id}
@@ -113,8 +97,7 @@ const Cart = () => {
             </span>
             <button
               type="button"
-              className="px-2 py-3 text-sm font-bold text-white uppercase bg-orange"
-            >
+              className="px-2 py-3 text-sm font-bold text-white uppercase bg-orange">
               Checkout
             </button>
           </div>

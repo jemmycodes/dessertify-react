@@ -1,69 +1,42 @@
-import toast from "react-hot-toast";
-import { supabase } from "../../supabaseClient";
 import * as yup from "yup";
 
 export const checkIfItemExists = (id, array) =>
-  array.findIndex(item => item.id === id);
+  array.findIndex((item) => item.id === id);
 
 export const filterArray = (array, searchInput) =>
   searchInput
-    ? array.filter(item =>
+    ? array.filter((item) =>
         item.name.toLowerCase().includes(searchInput.toLowerCase())
       )
     : array;
 
-export const signUpWithEmail = async (fields, toastID) => {
-  const { data, error } = await supabase.auth.signUp({
-    email: fields.email,
-    password: fields.password,
+
+
+export const signInWithGoogle = async () => {
+  console.log("signing in with google");
+
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
     options: {
-      data: {
-        firstname: fields.firstname,
-        lastname: fields.lastname,
-        houseAddress: fields.houseAddress,
-      },
+      redirectTo: "https://dessertify.vercel.app/menu",
     },
   });
 
-  if (error?.status === 0) {
-    toast.error("Please check your internet connection!", { id: toastID });
-    return;
-  }
-
   if (error) {
-    toast.error("Something went wrong, please try again!", { id: toastID });
-    return;
+    console.log(error.message, error.code);
+    return error;
   }
 
-  toast.dismiss(toastID);
-  return data;
+  return { data, error };
 };
 
-export const signInWithEmail = async (fields, toastID) => {
-  const { data, error } = await supabase.auth.signInWithPassword(fields);
-
-  if (error?.status === 400) {
-    toast.error("Email or Password is incorrect!", { id: toastID });
-    return;
-  }
-
-  if (error) {
-    toast.error("Something went wrong, please try again!", { id: toastID });
-  }
-
-  toast.dismiss(toastID);
-  return data;
-};
-
-export const getUserSession = async () => {
-  const { data, error } = await supabase.auth.getSession();
+export const signUserOut = async () => {
+  const { error } = await supabase.auth.signOut();
 
   if (error) {
     toast.error("Something went wrong, please try again!");
     return;
   }
-
-  return data.session;
 };
 
 export const signupSchema = yup

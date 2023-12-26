@@ -1,13 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import google from "../assets/google.webp";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Logo from "../Components/Navigation/Logo";
 import { AuthLayout, Input } from "../Components";
 import { useState } from "react";
-import { signInWithEmail, loginSchema } from "../utils/utils";
+import { signInWithEmail, signInWithGoogle } from "../utils/supabase.js";
 import toast from "react-hot-toast";
+import { loginSchema } from "../utils/utils.js";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const Login = () => {
     reset,
   } = useForm({ resolver: yupResolver(loginSchema) });
 
-  const onsubmit = async fields => {
+  const onsubmit = async (fields) => {
     setLoading(true);
     const toastID = toast.loading("Signing you in ...");
 
@@ -40,7 +40,7 @@ const Login = () => {
       <h1 className="text-2xl font-bold font-frank-ruhl">Welcome back!</h1>
       <h4 className="text-sm ">Sign in with your email address and password</h4>
 
-      <form className="my-8 space-y-4" onSubmit={handleSubmit(onsubmit)}>
+      <form className="w-full my-8 space-y-4">
         <Input
           id="email"
           type="email"
@@ -60,7 +60,12 @@ const Login = () => {
           Forgot Password?
         </p>
 
-        <button className=" px-5 w-full py-3 border flex justify-center items-center rounded-full font-medium text-sm relative">
+        <button
+          className="relative flex items-center justify-center w-full px-5 py-3 text-sm font-medium border rounded-full "
+          onClick={async (e) => {
+            e.preventDefault();
+            const response = await signInWithGoogle();
+          }}>
           <img
             src={google}
             alt=""
@@ -74,8 +79,8 @@ const Login = () => {
         <button
           disabled={loading}
           type="submit"
-          className="px-10 py-3 text-sm w-full rounded-full text-white bg-orange disabled:bg-gray-400 disabled:text-white"
-        >
+          onClick={handleSubmit(onsubmit)}
+          className="w-full px-10 py-3 text-sm text-white rounded-full bg-orange disabled:bg-gray-400 disabled:text-white">
           {loading ? "Loading..." : "Sign in"}
         </button>
       </form>

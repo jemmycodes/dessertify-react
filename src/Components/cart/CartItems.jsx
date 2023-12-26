@@ -1,12 +1,16 @@
 import React from "react";
 import { LazyImage } from "..";
-import useCartStore from "../../store/CartStore";
+import useCart from "../../state/useCart";
 
 // eslint-disable-next-line
 const CartItems = ({ image, name, category, id, quantity, price }) => {
-  const removeFromCart = useCartStore(state => state.removeFromCart);
-  const increaseQuantity = useCartStore(state => state.increaseQuantity);
-  const decreaseQuantity = useCartStore(state => state.decreaseQuantity);
+  const { removeFromCart, increaseQuantity, decreaseQuantity } = useCart(
+    (state) => ({
+      removeCart: state.removeFromCart,
+      increaseCart: state.increaseCart,
+      decreaseQuantity: state.decreaseQuantity,
+    })
+  );
 
   return (
     <div className="flex justify-between gap-6 md:grid place-content-end grid-cols-cart-items">
@@ -22,9 +26,8 @@ const CartItems = ({ image, name, category, id, quantity, price }) => {
           <p className="text-sm">{name}</p>
           <p className="text-xs font-bold text-orange">{category}</p>
           <button
-            className="text-sm text-gray-600  px-0 text-left cursor-pointer"
-            onClick={() => removeFromCart(id)}
-          >
+            className="px-0 text-sm text-left text-gray-600 cursor-pointer"
+            onClick={() => removeFromCart(id)}>
             Remove
           </button>
         </figcaption>
@@ -33,9 +36,8 @@ const CartItems = ({ image, name, category, id, quantity, price }) => {
         <p className="text-sm">{name}</p>
         <p className="text-xs font-bold text-orange">{category}</p>
         <button
-          className="text-sm text-gray-600  px-0 text-left cursor-pointer"
-          onClick={() => removeFromCart(id)}
-        >
+          className="px-0 text-sm text-left text-gray-600 cursor-pointer"
+          onClick={() => removeFromCart(id)}>
           Remove
         </button>
       </figcaption>
@@ -44,22 +46,19 @@ const CartItems = ({ image, name, category, id, quantity, price }) => {
           type="button"
           onClick={() => {
             decreaseQuantity(id);
-          }}
-        >
+          }}>
           -
         </button>
         <p
           type="text"
-          className="w-12 p-1 text-xs text-center border rounded-md "
-        >
+          className="w-12 p-1 text-xs text-center border rounded-md ">
           {quantity}
         </p>
         <button
           type="button"
           onClick={() => {
             increaseQuantity(id);
-          }}
-        >
+          }}>
           +
         </button>
       </span>

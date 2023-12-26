@@ -20,7 +20,7 @@ const MenuLayout = () => {
       </div>
     );
 
-  if (error) return <p>Something went wrong!</p>;
+  if (error) return <p>Something went wrong</p>;
 
   const filteredData = filterArray(data, searchValue);
 
