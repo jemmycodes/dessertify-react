@@ -59,14 +59,12 @@ export const signInWithEmail = async (fields, toastID) => {
 };
 
 export const getUserSession = async () => {
-  const { data, error } = await supabase.auth.getSession();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  if (error) {
-    toast.error("Something went wrong, please try again!");
-    return;
-  }
-
-  return data.session;
+  console.log(user)
+  return user;
 };
 
 export const signInWithGoogle = async () => {

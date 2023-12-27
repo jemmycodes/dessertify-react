@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import google from "../assets/google.webp";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Logo from "../Components/Navigation/Logo";
 import { AuthLayout, Input } from "../Components";
 import { useState } from "react";
 import { signInWithEmail, signInWithGoogle } from "../utils/supabase.js";
@@ -35,8 +34,6 @@ const Login = () => {
 
   return (
     <AuthLayout className="">
-      <Logo className="flex self-center md:hidden" />
-
       <h1 className="text-2xl font-bold font-frank-ruhl">Welcome back!</h1>
       <h4 className="text-sm ">Sign in with your email address and password</h4>
 

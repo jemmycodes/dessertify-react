@@ -1,13 +1,26 @@
 import { emptyCart } from "../assets";
-import React from "react";
+import React, { useEffect } from "react";
 import { BiArrowBack } from "react-icons/bi";
 import useCart from "../state/useCart.js";
 import { CartItems, LazyImage } from "../Components";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import CartLayout from "../Components/Layout/CartLayout";
+import useAuth from "../state/useAuth.js";
+import toast from "react-hot-toast";
 
 const Cart = () => {
   const navigate = useNavigate();
+
+  const user = useAuth((state) => state.user);
+  console.log(user);
+
+  useEffect(() => {
+    if (!user) {
+      toast.error("You must be logged in to access the cart");
+
+      navigate("/login");
+    }
+  }, [user]);
 
   const { cartItems, totalAmount } = useCart((state) => ({
     cartItems: state.cartItems,
