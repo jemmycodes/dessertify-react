@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createBrowserRouter, Router, RouterProvider } from "react-router-dom";
 import { Home, Menu, NotFound, Cart, Signup, Login } from "./Pages";
-import { AuthLayout, MenuLayout, RootLayout } from "./Components";
+import {  MenuLayout, RootLayout } from "./Components";
 
 const App = () => {
+ 
+
   const router = createBrowserRouter([
     {
       path: "/",

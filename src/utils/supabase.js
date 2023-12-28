@@ -58,14 +58,7 @@ export const signInWithEmail = async (fields, toastID) => {
   return data;
 };
 
-export const getUserSession = async () => {
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
 
-  console.log(user)
-  return user;
-};
 
 export const signInWithGoogle = async () => {
   console.log("signing in with google");

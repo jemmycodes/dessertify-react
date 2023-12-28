@@ -3,13 +3,18 @@ import toast from "react-hot-toast";
 import React, { useState } from "react";
 import { IoAddCircle } from "react-icons/io5";
 import useCart from "../../state/useCart";
-import { getUserSession } from "../../utils/supabase.js";
 import { AiFillMinusCircle, AiFillStar } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../state/useAuth";
 
 // eslint-disable-next-line react/prop-types
 const MenuItems = ({ image, description, price, name, id, category }) => {
   const navigate = useNavigate();
+  const user = useAuth((state) => {
+    console.log(state);
+  });
+
+  console.log(user);
   const addToCart = useCart((state) => state.addToCart);
 
   const [quantity, setQuantity] = useState(1);
@@ -61,7 +66,8 @@ const MenuItems = ({ image, description, price, name, id, category }) => {
           className="px-2 py-2 text-sm transition-colors duration-200 border rounded-md border-orange hover:text-white hover:bg-orange text-orange"
           type="button"
           onClick={async () => {
-            response &&
+            if (user) {
+              toast.success(`${quantity} ${name} added to cart!`);
               addToCart({
                 name,
                 quantity: +quantity,
@@ -70,6 +76,12 @@ const MenuItems = ({ image, description, price, name, id, category }) => {
                 image,
                 id,
               });
+
+              return;
+            }
+
+            toast.error("Log in to access the cart");
+            navigate("/login");
           }}>
           Add to cart
         </button>

@@ -1,16 +1,27 @@
 import { create } from "zustand";
-import { getUserSession } from "../utils/supabase";
+import toast from "react-hot-toast";
+import { supabase } from "../../supabaseClient";
 
 const useAuth = create((set) => ({
   user: null,
   loading: true,
-  getSession: async () => {
-    const user = await getUserSession();
+  getSession: () =>
+    set(async (state) => {
+      const {
+        data: { session },
+        error,
+      } = await supabase.auth.getSession();
 
+      if (error) {
+        toast.error("An error occurred");
+        return;
+      }
 
-    set({ user: user, loading: false });
-    console.log(user);
-  },
+      console.log(session, error);
+
+      console.log(state);
+      return { user: "hi", loading: false };
+    }),
 }));
 
 export default useAuth;

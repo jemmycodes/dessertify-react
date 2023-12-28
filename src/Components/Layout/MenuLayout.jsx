@@ -1,15 +1,14 @@
 import React from "react";
 import { MenuItems } from "../index.js";
 import { Metronome } from "@uiball/loaders";
-import {useFetch} from "../../hooks/useFetch"
+import { useFetch } from "../../hooks/useFetch";
 import { filterArray } from "../../utils/utils.js";
-import { useSearchParams} from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 const MenuLayout = () => {
-
   const [searchParams] = useSearchParams();
 
-      const { loading, error, data } = useFetch();
+  const { loading, error, data } = useFetch();
 
   const searchValue = searchParams.get("search")?.trim();
 

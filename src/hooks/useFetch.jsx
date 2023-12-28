@@ -11,8 +11,8 @@ const useFetch = () => {
 
   const url =
     pathname === "/menu/desserts"
-      ? "https://freerandomapi.cyclic.app/api/v1/desserts?limit=120"
-      : `https://freerandomapi.cyclic.app/api/v1/desserts?category=${menutype}`;
+      ? `${import.meta.env.VITE_SITE_URL}limit=120`
+      : `${import.meta.env.VITE_SITE_URL}category=${menutype}`;
 
   useEffect(() => {
     setLoading(true);

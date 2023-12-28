@@ -10,32 +10,23 @@ export const filterArray = (array, searchInput) =>
       )
     : array;
 
+export const fetchData = async (url) => {
+  let loading = true;
 
+  try {
+    const response = await fetch(url);
 
-export const signInWithGoogle = async () => {
-  console.log("signing in with google");
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
 
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: "google",
-    options: {
-      redirectTo: "https://dessertify.vercel.app/menu",
-    },
-  });
+    const data = await response.json();
 
-  if (error) {
-    console.log(error.message, error.code);
+    return data;
+  } catch (error) {
     return error;
-  }
-
-  return { data, error };
-};
-
-export const signUserOut = async () => {
-  const { error } = await supabase.auth.signOut();
-
-  if (error) {
-    toast.error("Something went wrong, please try again!");
-    return;
+  } finally {
+    loading = false;
   }
 };
 

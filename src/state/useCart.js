@@ -2,11 +2,12 @@ import { create } from "zustand";
 import toast from "react-hot-toast";
 import { checkIfItemExists } from "../utils/utils";
 
-const useCart = create(set => ({
+const useCart = create((set) => ({
   cartItems: [],
   totalAmount: 0,
-  addToCart: item =>
+  addToCart: (item) =>
     set(({ cartItems, totalAmount }) => {
+      console.log(userExists);
       totalAmount = totalAmount + item.quantity * item.price;
       const existingItemIndex = checkIfItemExists(item.id, cartItems);
 
@@ -23,7 +24,7 @@ const useCart = create(set => ({
       return { cartItems: [item, ...cartItems], totalAmount };
     }),
 
-  removeFromCart: id =>
+  removeFromCart: (id) =>
     set(({ cartItems, totalAmount }) => {
       const index = checkIfItemExists(id, cartItems);
 
@@ -34,12 +35,12 @@ const useCart = create(set => ({
       toast.success(`${item.name} removed from cart`);
 
       return {
-        cartItems: cartItems.filter(item => item.id !== id),
+        cartItems: cartItems.filter((item) => item.id !== id),
         totalAmount,
       };
     }),
 
-  increaseQuantity: id =>
+  increaseQuantity: (id) =>
     set(({ cartItems, totalAmount }) => {
       const itemIndex = checkIfItemExists(id, cartItems);
 
@@ -52,7 +53,7 @@ const useCart = create(set => ({
       return { cartItems: [...cartItems], totalAmount };
     }),
 
-  decreaseQuantity: id =>
+  decreaseQuantity: (id) =>
     set(({ cartItems, totalAmount }) => {
       const itemIndex = checkIfItemExists(id, cartItems);
 
