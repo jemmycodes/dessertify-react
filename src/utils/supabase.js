@@ -81,8 +81,7 @@ export const signInWithEmail = async (fields, toastID) => {
 };
 
 export const signInWithGoogle = async () => {
-  console.log("signing in with google");
-
+  toast.loading("Signing in with google");
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {

@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -6,7 +6,7 @@ import google from "../assets/google.webp";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AuthLayout, Input, Modal } from "../Components";
 import useTogglePassword from "../hooks/useTogglePassword";
-import { signUpWithEmail } from "../utils/supabase";
+import { signInWithGoogle, signUpWithEmail } from "../utils/supabase";
 import { signupSchema } from "../utils/utils";
 
 const Signup = () => {
@@ -114,7 +114,10 @@ const Signup = () => {
         <p className="-mt-6 text-xs text-right underline text-orange">
           Forgot Password?
         </p>
-        <button className="relative flex items-center justify-center w-full px-5 py-3 text-sm font-medium border rounded-full ">
+        <button
+          className="relative flex items-center justify-center w-full px-5 py-3 text-sm font-medium border rounded-full "
+          type="button"
+          onClick={signInWithGoogle}>
           <img
             src={google}
             alt=""
