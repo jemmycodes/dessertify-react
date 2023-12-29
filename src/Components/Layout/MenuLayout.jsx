@@ -23,6 +23,7 @@ const MenuLayout = () => {
 
   const filteredData = filterArray(data, searchValue);
 
+
   if (searchValue && filteredData.length === 0) {
     return (
       <p>
@@ -32,17 +33,19 @@ const MenuLayout = () => {
     );
   }
 
-  return filteredData.map((item, index) => (
-    <MenuItems
-      key={item._id}
-      id={item._id}
-      price={index * 10}
-      description={item.description}
-      name={item.name}
-      image={item.photoUrl}
-      category={item.category}
-    />
-  ));
+  return (
+    filteredData?.map((item, index) => (
+      <MenuItems
+        key={item._id}
+        id={item._id}
+        price={index * 10}
+        description={item.description}
+        name={item.name}
+        image={item.photoUrl}
+        category={item.category}
+      />
+    )) ?? <p className="text-center font-bold">Something went wrong</p>
+  );
 };
 
 export default MenuLayout;
