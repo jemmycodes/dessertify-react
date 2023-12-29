@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        "auth-page": "url('src/assets/auth-bg.jpg')",
+        "auth-page": "url('/src/assets/auth-bg.jpg')",
       },
       colors: {
         orange: "#ed7c12",
