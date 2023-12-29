@@ -24,6 +24,7 @@ const MenuLayout = () => {
   const filteredData = filterArray(data, searchValue);
 
 
+
   if (searchValue && filteredData.length === 0) {
     return (
       <p>

@@ -7,7 +7,7 @@ const useFetch = () => {
   const { pathname } = useLocation();
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const url =
     pathname === "/menu/desserts"
@@ -15,11 +15,10 @@ const useFetch = () => {
       : `${import.meta.env.VITE_SITE_URL}category=${menutype}`;
 
   useEffect(() => {
-    setLoading(true);
-
     const fetchMenu = async () => {
       try {
         const { data } = await axios.get(url);
+
         setData(data.data);
       } catch (error) {
         console.error(error);
