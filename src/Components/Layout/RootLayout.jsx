@@ -5,16 +5,15 @@ import Navigation from "../Navigation/Navigation";
 import { Outlet, useLocation } from "react-router-dom";
 
 function RootLayout() {
+  const { pathname } = useLocation();
+
   const getSession = useAuth((state) => state.getSession);
 
   useEffect(() => {
     (async () => {
       await getSession();
-      console.log("finshed getting session");
     })();
   }, []);
-
-  const { pathname } = useLocation();
 
   const isAuthPage = pathname === "/signup" || pathname === "/login";
 

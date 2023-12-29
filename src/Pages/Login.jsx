@@ -7,6 +7,7 @@ import { useState } from "react";
 import { signInWithEmail, signInWithGoogle } from "../utils/supabase.js";
 import toast from "react-hot-toast";
 import { loginSchema } from "../utils/utils.js";
+import useAuth from "../state/useAuth.js";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -25,9 +26,12 @@ const Login = () => {
 
     const response = await signInWithEmail(fields, toastID);
 
-    console.log(response);
-
-    response?.session && navigate("/menu");
+    if (response?.data) {
+      useAuth.setState({ session: response.data.session });
+      toast.success("Signed in successfully!");
+      reset();
+      navigate("/menu");
+    }
 
     setLoading(false);
   };

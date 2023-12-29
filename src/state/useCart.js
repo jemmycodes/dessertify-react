@@ -7,7 +7,7 @@ const useCart = create((set) => ({
   totalAmount: 0,
   addToCart: (item) =>
     set(({ cartItems, totalAmount }) => {
-      console.log(userExists);
+      
       totalAmount = totalAmount + item.quantity * item.price;
       const existingItemIndex = checkIfItemExists(item.id, cartItems);
 

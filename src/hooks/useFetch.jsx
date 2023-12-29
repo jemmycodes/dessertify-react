@@ -28,7 +28,6 @@ const useFetch = () => {
         setLoading(false);
       }
     };
-
     fetchMenu();
   }, [url]);
 

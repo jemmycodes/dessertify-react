@@ -6,15 +6,13 @@ import useCart from "../../state/useCart";
 import { AiFillMinusCircle, AiFillStar } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../state/useAuth";
+import { useShallow } from "zustand/react/shallow";
 
 // eslint-disable-next-line react/prop-types
 const MenuItems = ({ image, description, price, name, id, category }) => {
   const navigate = useNavigate();
-  const user = useAuth((state) => {
-    console.log(state);
-  });
+  const session = useAuth(useShallow((state) => state.session));
 
-  console.log(user);
   const addToCart = useCart((state) => state.addToCart);
 
   const [quantity, setQuantity] = useState(1);
@@ -66,7 +64,7 @@ const MenuItems = ({ image, description, price, name, id, category }) => {
           className="px-2 py-2 text-sm transition-colors duration-200 border rounded-md border-orange hover:text-white hover:bg-orange text-orange"
           type="button"
           onClick={async () => {
-            if (user) {
+            if (session) {
               toast.success(`${quantity} ${name} added to cart!`);
               addToCart({
                 name,
@@ -76,11 +74,10 @@ const MenuItems = ({ image, description, price, name, id, category }) => {
                 image,
                 id,
               });
-
               return;
             }
 
-            toast.error("Log in to access the cart");
+            toast.error("Log in to add to the cart");
             navigate("/login");
           }}>
           Add to cart

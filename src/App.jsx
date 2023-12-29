@@ -1,11 +1,8 @@
-import React, { useEffect } from "react";
-import { createBrowserRouter, Router, RouterProvider } from "react-router-dom";
-import { Home, Menu, NotFound, Cart, Signup, Login } from "./Pages";
-import {  MenuLayout, RootLayout } from "./Components";
-
+import React from "react";
+import { MenuLayout, RootLayout } from "./Components";
+import { Home, Menu, NotFound, Cart, Signup, Login, Profile } from "./Pages";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const App = () => {
- 
-
   const router = createBrowserRouter([
     {
       path: "/",
@@ -34,6 +31,10 @@ const App = () => {
               element: <MenuLayout />,
             },
           ],
+        },
+        {
+          path: "profile",
+          element: <Profile />,
         },
         {
           path: "cart",

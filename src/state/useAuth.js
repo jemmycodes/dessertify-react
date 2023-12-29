@@ -1,27 +1,29 @@
 import { create } from "zustand";
-import toast from "react-hot-toast";
+import { persist } from "zustand/middleware";
 import { supabase } from "../../supabaseClient";
+import toast from "react-hot-toast";
 
-const useAuth = create((set) => ({
-  user: null,
-  loading: true,
-  getSession: () =>
-    set(async (state) => {
-      const {
-        data: { session },
-        error,
-      } = await supabase.auth.getSession();
+const useAuth = create(
+  persist(
+    (set) => ({
+      session: null,
+      getSession: async () => {
+        const { data, error } = await supabase.auth.getSession();
+        if (error) {
+          toast.error("An error occurred!");
+        }
 
-      if (error) {
-        toast.error("An error occurred");
-        return;
-      }
-
-      console.log(session, error);
-
-      console.log(state);
-      return { user: "hi", loading: false };
+        set({ session: data?.session ? data.session : null });
+      },
+      clearSession: () => {
+        set({ session: null });
+        window.location.replace("/login");
+      },
     }),
-}));
+    {
+      name: "user_session",
+    }
+  )
+);
 
 export default useAuth;

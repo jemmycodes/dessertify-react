@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { FaRegUser, FaRegUserCircle } from "react-icons/fa";
 import {
   MdOutlineRestaurantMenu,
   MdShoppingCart,
@@ -8,15 +9,18 @@ import {
 } from "react-icons/md";
 import { BiLogOut } from "react-icons/bi";
 import Logo from "./Logo";
+import useAuth from "../../state/useAuth";
+import { signUserOut } from "../../utils/supabase";
 
 const assignActiveClass = ({ isActive }) =>
   isActive ? "p-2 bg-orange text-white rounded-full" : "";
 
 const Navigation = () => {
-  // hiding the navigation in auth screens
-
+  //check to hide the navigation in auth screens
   const { pathname } = useLocation();
   const isAuth = pathname === "/signup" || pathname === "/login";
+
+  const session = useAuth((state) => state.session);
 
   return (
     !isAuth && (
@@ -43,10 +47,17 @@ const Navigation = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="login" className={assignActiveClass}>
-              <MdLogin />
+            <NavLink
+              to={session ? "profile" : "login"}
+              className={assignActiveClass}>
+              {session ? <FaRegUserCircle /> : <MdLogin />}
             </NavLink>
           </li>
+          {session && (
+            <button className="text-2xl" onClick={signUserOut}>
+              <BiLogOut />
+            </button>
+          )}
         </ul>
         <div></div>
       </nav>

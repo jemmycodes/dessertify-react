@@ -35,6 +35,7 @@ const MenuLayout = () => {
   return filteredData.map((item, index) => (
     <MenuItems
       key={item._id}
+      id={item._id}
       price={index * 10}
       description={item.description}
       name={item.name}
