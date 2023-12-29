@@ -65,7 +65,6 @@ const MenuItems = ({ image, description, price, name, id, category }) => {
           type="button"
           onClick={async () => {
             if (session) {
-              toast.success(`${quantity} ${name} added to cart!`);
               addToCart({
                 name,
                 quantity: +quantity,

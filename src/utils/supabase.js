@@ -48,7 +48,6 @@ export const signUpWithEmail = async (fields, toastID) => {
 };
 
 export const signInWithEmail = async (fields, toastID) => {
-  console.log("hi");
   const { data, error } = await supabase.auth.signInWithPassword(fields);
 
   let response;

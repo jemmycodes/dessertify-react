@@ -7,7 +7,6 @@ const useCart = create((set) => ({
   totalAmount: 0,
   addToCart: (item) =>
     set(({ cartItems, totalAmount }) => {
-      
       totalAmount = totalAmount + item.quantity * item.price;
       const existingItemIndex = checkIfItemExists(item.id, cartItems);
 
@@ -19,7 +18,7 @@ const useCart = create((set) => ({
         return { cartItems: [...cartItems], totalAmount };
       }
 
-      toast.success(`${item.name} added to cart`);
+      toast.success(`${item.quantity} ${item.name} added to cart`);
 
       return { cartItems: [item, ...cartItems], totalAmount };
     }),

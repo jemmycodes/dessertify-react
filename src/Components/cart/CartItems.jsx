@@ -6,7 +6,7 @@ import useCart from "../../state/useCart";
 const CartItems = ({ image, name, category, id, quantity, price }) => {
   const { removeFromCart, increaseQuantity, decreaseQuantity } = useCart(
     (state) => ({
-      removeCart: state.removeFromCart,
+      removeFromCart: state.removeFromCart,
       increaseCart: state.increaseCart,
       decreaseQuantity: state.decreaseQuantity,
     })
