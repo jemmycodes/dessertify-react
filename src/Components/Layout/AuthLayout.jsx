@@ -16,7 +16,7 @@ const AuthLayout = ({ children, heading, subheading }) => {
   return (
     <main className="flex items-center justify-center w-full h-screen p-4 bg-cover bg-auth-page">
       <Toaster position="top-center" />;
-      <div className="max-w-md p-8 mx-auto overflow-y-scroll bg-white rounded-xl max-h-[80%] flex flex-col ">
+      <div className="max-w-md p-8 mx-auto overflow-y-scroll scrollbar-hide bg-white rounded-xl max-h-[80%] flex flex-col ">
         <Logo className="flex self-center mx-auto" />
         <h1 className="text-2xl font-bold text-center font-frank-ruhl">
           {heading}
