@@ -66,6 +66,7 @@ const Login = () => {
           onClick={async (e) => {
             e.preventDefault();
             const response = await signInWithGoogle();
+            console.log(response);
           }}>
           <img
             src={google}

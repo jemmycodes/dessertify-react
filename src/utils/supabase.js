@@ -95,10 +95,14 @@ export const signInWithGoogle = async () => {
     return error;
   }
 
+  console.log(data, error);
+
   return { data, error };
 };
 
 export const signUserOut = async () => {
+  const toastID = toast.loading("Logging you out");
+
   const { error } = await supabase.auth.signOut();
 
   if (error) {
@@ -107,4 +111,5 @@ export const signUserOut = async () => {
   }
 
   useAuth.getState().clearSession();
+  toast.dismiss(toastID);
 };
