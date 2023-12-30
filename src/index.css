@@ -54,4 +54,12 @@ body {
   .rounded-btns {
     @apply flex  rounded-full border w-[30px] items-center justify-center h-[30px];
   }
+
+  form#profile-form div div {
+    @apply w-full max-w-xs;
+  }
+
+  form#profile-form div input {
+    @apply md:flex w-full;
+  }
 }

@@ -26,6 +26,7 @@ module.exports = {
       },
       gridTemplateColumns: {
         "root-layout": "5rem 1fr",
+        "profile-layout": "400px 4fr",
         "menu-items": "repeat(auto-fit, minmax(20rem, 1fr))",
         "menu-small-screens": "repeat(auto-fit, minmax(12rem, 1fr))",
         "cart-items": "3fr 1fr 1fr 1fr",
