@@ -47,38 +47,9 @@ export const signUpWithEmail = async (fields, toastID) => {
   return response;
 };
 
-export const signInWithEmail = async (fields, toastID) => {
-  const { data, error } = await supabase.auth.signInWithPassword(fields);
-
-  let response;
-
-  if (error?.status === 400) {
-    response = {
-      data: null,
-      error: error.message,
-    };
-    toast.error("Email or Password is incorrect!", { id: toastID });
-    return response;
-  }
-
-  if (error) {
-    response = {
-      data: null,
-      error: error.message,
-    };
-    toast.error("Something went wrong, please try again!", { id: toastID });
-    return response;
-  }
-
-  toast.dismiss(toastID);
-
-  response = {
-    data: data,
-    error: null,
-  };
-
-  return response;
-};
+export const signInWithEmail = () => {
+  console.log("hi")
+}
 
 export const signInWithGoogle = async () => {
   toast.loading("Signing in with google");

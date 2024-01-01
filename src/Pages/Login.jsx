@@ -16,24 +16,13 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
     reset,
   } = useForm({ resolver: yupResolver(loginSchema) });
 
   const onsubmit = async (fields) => {
-    setLoading(true);
-    const toastID = toast.loading("Signing you in ...");
-
-    const response = await signInWithEmail(fields, toastID);
-
-    if (response?.data) {
-      useAuth.setState({ session: response.data.session });
-      toast.success("Signed in successfully!");
-      reset();
-      navigate("/menu");
-    }
-
-    setLoading(false);
+  console.log(fields)
   };
 
   return (

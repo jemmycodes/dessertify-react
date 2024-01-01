@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import toast from "react-hot-toast";
 
 export const checkIfItemExists = (id, array) =>
   array.findIndex((item) => item.id === id);
@@ -65,3 +66,5 @@ export const loginSchema = yup
       .min(8, "Password must be at least 8 characters"),
   })
   .required();
+
+

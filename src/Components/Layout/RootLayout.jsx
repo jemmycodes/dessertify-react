@@ -7,7 +7,7 @@ import { Outlet, useLocation } from "react-router-dom";
 function RootLayout() {
   const { pathname } = useLocation();
 
-  const getSession = useAuth((state) => state.getSession);
+  const getSession = useAuth(({ getSession }) => getSession);
 
   useEffect(() => {
     (async () => {

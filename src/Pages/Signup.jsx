@@ -46,7 +46,7 @@ const Signup = () => {
       });
       setShowModal(true);
     }
-
+    toast.dismiss();
     console.log(showModal);
   };
 
