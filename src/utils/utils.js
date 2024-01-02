@@ -1,5 +1,6 @@
 import * as yup from "yup";
 import toast from "react-hot-toast";
+import { insertIntoDb, checkIfUserExists } from "./supabase";
 
 export const checkIfItemExists = (id, array) =>
   array.findIndex((item) => item.id === id);
@@ -67,4 +68,20 @@ export const loginSchema = yup
   })
   .required();
 
+export const createUserProfile = async (user_id, fields) => {
+  const userExists = await checkIfUserExists(user_id);
 
+
+  if (!userExists.data && userExists.error?.code === "PGRST116") {
+    console.log("calling");
+    const insertError = await insertIntoDb("users", {...fields, user_id});
+    console.log(insertError);
+    if (insertError) {
+      toast.error("An error occurred");
+      return insertError;
+    }
+  } else if (!(userExists.error?.code === "PGRST116") && !userExists.data) {
+    toast.error("An error occurred");
+    return userExists.error;
+  }
+};

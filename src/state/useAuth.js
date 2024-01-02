@@ -21,7 +21,8 @@ const useAuth = create(
       },
     }),
     {
-      name: "user_session",
+      name: "session",
+      partialize: (state) => ({ session: state.session }),
     }
   )
 );

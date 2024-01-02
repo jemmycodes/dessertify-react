@@ -22,7 +22,14 @@ const Login = () => {
   } = useForm({ resolver: yupResolver(loginSchema) });
 
   const onsubmit = async (fields) => {
-  console.log(fields)
+    const toastID = toast.loading("Signing you in...");
+    setLoading(true);
+    const response = await signInWithEmail(fields);
+    toast.dismiss(toastID);
+    setLoading(false);
+    if (!response) {
+      navigate("/menu");
+    }
   };
 
   return (

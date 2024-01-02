@@ -1,14 +1,17 @@
-import { useEffect } from "react";
+import toast from "react-hot-toast";
 import { Input } from "../Components";
 import useAuth from "../state/useAuth";
 import { useForm } from "react-hook-form";
 import { FaCamera } from "react-icons/fa";
 import authbg from "../assets/auth-bg.jpg";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+import { supabase } from "../../supabaseClient";
+import { checkIfUserExists, selectData } from "../utils/supabase";
 
 const Profile = () => {
   const session = useAuth((state) => state.session);
+  const [profile, setProfile] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,6 +20,20 @@ const Profile = () => {
       toast.error("You need to login to access the profile page");
     }
   }, [session]);
+
+  useEffect(() => {
+    (async () => {
+      const { data, error } = await supabase
+        .from("users")
+        .select("*")
+        .eq("user_id", session.user.id)
+        .single();
+      setProfile(data);
+
+      console.log(data) 
+      
+    })();
+  }, []);
 
   const {
     register,
