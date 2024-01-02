@@ -6,3 +6,4 @@ export { default as RootLayout } from "./Layout/RootLayout";
 export { default as AuthLayout } from "./Layout/AuthLayout";
 export { default as Input } from "./Ui/Input";
 export { default as Modal } from "./Ui/Modal";
+export { default as Metronome } from "./Layout/LoadingScreen";

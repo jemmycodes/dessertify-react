@@ -12,25 +12,25 @@ export const filterArray = (array, searchInput) =>
       )
     : array;
 
-export const fetchData = async (url) => {
-  let loading = true;
+// export const fetchData = async (url) => {
+//   let loading = true;
 
-  try {
-    const response = await fetch(url);
+//   try {
+//     const response = await fetch(url);
 
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
+//     if (!response.ok) {
+//       throw new Error(response.statusText);
+//     }
 
-    const data = await response.json();
+//     const data = await response.json();
 
-    return data;
-  } catch (error) {
-    return error;
-  } finally {
-    loading = false;
-  }
-};
+//     return data;
+//   } catch (error) {
+//     return error;
+//   } finally {
+//     loading = false;
+//   }
+// };
 
 export const signupSchema = yup
   .object({
@@ -55,6 +55,18 @@ export const signupSchema = yup
   })
   .required();
 
+export const profileSchema = yup.object({
+  firstname: yup.string().trim().required("First Name is required"),
+  lastname: yup.string().trim().required("Last name is required"),
+  email: yup
+    .string()
+    .trim()
+    .email("Email address is not valid")
+    .required("Email cannot be empty"),
+  houseAddress: yup.string().trim().required(" Address cannot be empty"),
+  location: yup.string().trim().required("Location cannot be empty"),
+});
+
 export const loginSchema = yup
   .object({
     email: yup
@@ -71,10 +83,9 @@ export const loginSchema = yup
 export const createUserProfile = async (user_id, fields) => {
   const userExists = await checkIfUserExists(user_id);
 
-
   if (!userExists.data && userExists.error?.code === "PGRST116") {
     console.log("calling");
-    const insertError = await insertIntoDb("users", {...fields, user_id});
+    const insertError = await insertIntoDb("users", { ...fields, user_id });
     console.log(insertError);
     if (insertError) {
       toast.error("An error occurred");

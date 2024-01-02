@@ -1,9 +1,7 @@
 import toast from "react-hot-toast";
 import { supabase } from "../../supabaseClient";
 import useAuth from "../state/useAuth";
-import { useActionData } from "react-router-dom";
 import { createUserProfile } from "./utils";
-import { useState } from "react";
 
 export const signUpWithEmail = async (fields, toastID) => {
   let response;
@@ -127,10 +125,17 @@ export const signUserOut = async () => {
 
 export const selectData = async (table, filterName, filterValue) => {
   const { data, error } = await supabase
-    .from("users")
+    .from(table)
     .select("*")
-    .eq("user_id", userID)
+    .eq(filterName, filterValue)
     .single();
+  
+ return {data,  error}
 
-  return { data, error };
 };
+
+export const updateData =async (table, item, filterName, filterValue) => {
+  const {error} = await supabase.from(table).update(item).eq(filterName, filterValue)
+
+  return error
+}

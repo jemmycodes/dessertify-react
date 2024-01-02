@@ -10,7 +10,9 @@ const Input = (
     ariaDescribedBy,
     errorMessage,
     icon,
+    readOnly,
     className,
+    value
   },
   ref
 ) => {
@@ -20,6 +22,8 @@ const Input = (
         {label}
       </label>
       <input
+        readOnly={readOnly}
+        defaultValue={value}
         ref={ref}
         placeholder={label}
         {...register(id)}
