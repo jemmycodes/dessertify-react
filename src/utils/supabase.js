@@ -11,7 +11,7 @@ export const signUpWithEmail = async (fields) => {
       firstname: fields.firstname,
       lastname: fields.lastname,
       houseAddress: fields.houseAddress,
-      emailRedirectTo: "https://dessertify.vercel.app/login"
+      emailRedirectTo: "http://192.168.0.182:5173/login",
     },
   });
 
@@ -25,7 +25,6 @@ export const signUpWithEmail = async (fields) => {
     toast.error("Account already exists, try logging in");
     return;
   }
-
 
   return data;
 };
@@ -56,6 +55,8 @@ export const signInWithEmail = async (fields) => {
     toast.error("An error occurred!");
     return error;
   }
+
+  console.log(data.user.user_metadata);
 
   const { firstname, lastname, avatar_url, houseAddress, email } =
     data.user.user_metadata;
