@@ -9,11 +9,12 @@ function RootLayout() {
 
   const getSession = useAuth(({ getSession }) => getSession);
 
-  useEffect(() => {
-    (async () => {
-      await getSession();
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //      console.log("calling")
+  //     await getSession();
+  //   })();
+  // }, []);
 
   const isAuthPage = pathname === "/signup" || pathname === "/login";
 

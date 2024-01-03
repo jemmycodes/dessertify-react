@@ -64,6 +64,8 @@ const MenuItems = ({ image, description, price, name, id, category }) => {
           className="px-2 py-2 text-sm transition-colors duration-200 border rounded-md border-orange hover:text-white hover:bg-orange text-orange"
           type="button"
           onClick={async () => {
+
+            
             if (session) {
               addToCart({
                 name,

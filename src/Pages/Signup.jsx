@@ -3,11 +3,11 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import google from "../assets/google.webp";
+import { signupSchema } from "../utils/utils";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AuthLayout, Input, Modal } from "../Components";
 import useTogglePassword from "../hooks/useTogglePassword";
 import { signInWithGoogle, signUpWithEmail } from "../utils/supabase";
-import { signupSchema } from "../utils/utils";
 
 const Signup = () => {
   const [showModal, setShowModal] = useState(false);
@@ -26,28 +26,25 @@ const Signup = () => {
   });
 
   const onSubmit = async (fields) => {
+    const toastID = toast.loading("Creating account...");
     setLoading(true);
-    const toastID = toast.loading("Creating Account");
+    console.log(fields);
+    const data = await signUpWithEmail(fields);
 
-    const { data, error } = await signUpWithEmail(fields, toastID);
-
-    setLoading(false);
-
-    console.log(data, error);
-
-    if (!data?.session) {
+    if (data?.user && !data?.session) {
+      setShowModal(true);
       reset({
-        email: "",
         firstname: "",
         lastname: "",
+        email: "",
         houseAddress: "",
         password: "",
         confirmPassword: "",
       });
-      setShowModal(true);
     }
-    toast.dismiss();
-    console.log(showModal);
+
+    toast.dismiss(toastID);
+    setLoading(false);
   };
 
   return (

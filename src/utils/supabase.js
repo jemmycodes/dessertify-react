@@ -3,49 +3,31 @@ import { supabase } from "../../supabaseClient";
 import useAuth from "../state/useAuth";
 import { createUserProfile } from "./utils";
 
-export const signUpWithEmail = async (fields, toastID) => {
-  let response;
-
+export const signUpWithEmail = async (fields) => {
   const { data, error } = await supabase.auth.signUp({
     email: fields.email,
     password: fields.password,
     options: {
-      data: {
-        firstname: fields.firstname,
-        lastname: fields.lastname,
-        houseAddress: fields.houseAddress,
-      },
+      firstname: fields.firstname,
+      lastname: fields.lastname,
+      houseAddress: fields.houseAddress,
+      emailRedirectTo: "https://dessertify.vercel.app/login"
     },
   });
 
-  if (error?.status === 0) {
-    toast.error("Please check your internet connection!", { id: toastID });
-    response = {
-      data: null,
-      error: error.message,
-    };
-
-    return response;
-  }
-
   if (error) {
-    toast.error("Something went wrong, please try again!", { id: toastID });
-    response = {
-      data: null,
-      error: error.message,
-    };
-
-    return response;
+    console.log(error);
+    toast.error("An error occurred");
+    return;
   }
 
-  toast.dismiss(toastID);
-  response = {
-    data: data,
-    error: null,
-  };
+  if (data?.user?.identities.length === 0) {
+    toast.error("Account already exists, try logging in");
+    return;
+  }
 
-  console.log(response);
-  return response;
+
+  return data;
 };
 
 export const checkIfUserExists = async (userID) =>
@@ -129,13 +111,15 @@ export const selectData = async (table, filterName, filterValue) => {
     .select("*")
     .eq(filterName, filterValue)
     .single();
-  
- return {data,  error}
 
+  return { data, error };
 };
 
-export const updateData =async (table, item, filterName, filterValue) => {
-  const {error} = await supabase.from(table).update(item).eq(filterName, filterValue)
+export const updateData = async (table, item, filterName, filterValue) => {
+  const { error } = await supabase
+    .from(table)
+    .update(item)
+    .eq(filterName, filterValue);
 
-  return error
-}
+  return error;
+};

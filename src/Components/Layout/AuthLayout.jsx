@@ -6,13 +6,13 @@ import useAuth from "../../state/useAuth.js";
 import { useNavigate } from "react-router-dom";
 
 const AuthLayout = ({ children, heading, subheading }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const session = useAuth((state) => state.session);
+  // const session = useAuth((state) => state.session);
 
-  useEffect(() => {
-    session && navigate("/menu");
-  }, [session]);
+  // useEffect(() => {
+  //   session && navigate("/menu");
+  // }, [session]);
 
   return (
     <main className="flex items-center justify-center w-full h-screen p-4 bg-cover ">
